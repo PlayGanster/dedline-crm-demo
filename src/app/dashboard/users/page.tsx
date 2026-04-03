@@ -91,9 +91,9 @@ const roleLabels: Record<string, string> = {
 };
 
 const roleColors: Record<string, string> = {
-  MANAGER: "bg-blue-100 text-blue-700 border-blue-200",
-  HEAD_OF_MANAGERS: "bg-indigo-100 text-indigo-700 border-indigo-200",
-  DIRECTOR: "bg-red-100 text-red-700 border-red-200",
+  MANAGER: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-800",
+  HEAD_OF_MANAGERS: "bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900 dark:text-indigo-300 dark:border-indigo-800",
+  DIRECTOR: "bg-red-100 text-red-700 border-red-200 dark:bg-red-900 dark:text-red-300 dark:border-red-800",
 };
 
 export default function UsersPage() {
@@ -148,43 +148,43 @@ export default function UsersPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-                <User className="h-5 w-5 text-slate-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+                <User className="h-5 w-5 text-slate-600 dark:text-slate-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Всего</p>
-                <p className="text-lg font-bold">{stats.total}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Всего</p>
+                <p className="text-lg font-bold text-foreground">{stats.total}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 dark:bg-green-950">
+                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Активны</p>
-                <p className="text-lg font-bold text-green-600">{stats.active}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Активны</p>
+                <p className="text-lg font-bold text-green-600 dark:text-green-400">{stats.active}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50">
-                <XCircle className="h-5 w-5 text-red-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950">
+                <XCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Не активны</p>
-                <p className="text-lg font-bold text-red-600">{stats.inactive}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Не активны</p>
+                <p className="text-lg font-bold text-red-600 dark:text-red-400">{stats.inactive}</p>
               </div>
             </div>
           </CardContent>
@@ -222,57 +222,57 @@ export default function UsersPage() {
       </div>
 
       {/* Table */}
-      <Card>
+      <Card className="bg-white dark:bg-card">
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>ФИО</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Телефон</TableHead>
-                <TableHead>Роль</TableHead>
-                <TableHead className="text-center">Статус</TableHead>
+              <TableRow className="border-slate-200 dark:border-slate-700">
+                <TableHead className="text-slate-900 dark:text-foreground">ID</TableHead>
+                <TableHead className="text-slate-900 dark:text-foreground">ФИО</TableHead>
+                <TableHead className="text-slate-900 dark:text-foreground">Email</TableHead>
+                <TableHead className="text-slate-900 dark:text-foreground">Телефон</TableHead>
+                <TableHead className="text-slate-900 dark:text-foreground">Роль</TableHead>
+                <TableHead className="text-slate-900 dark:text-foreground text-center">Статус</TableHead>
                 <TableHead className="w-10"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center text-slate-500">
+                <TableRow className="border-slate-200 dark:border-slate-700">
+                  <TableCell colSpan={7} className="h-24 text-center text-slate-500 dark:text-slate-400">
                     Пользователи не найдены
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredUsers.map((user) => (
-                  <TableRow key={user.id} className="hover:bg-slate-50">
-                    <TableCell className="font-medium text-brand-600">
+                  <TableRow key={user.id} className="hover:bg-slate-50 dark:hover:bg-slate-800">
+                    <TableCell className="font-medium text-brand-600 dark:text-brand-400">
                       {user.id}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <Avatar className="h-10 w-10">
-                          <AvatarFallback className="bg-brand-100 text-brand-700">
+                          <AvatarFallback className="bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300">
                             {user.last_name[0]}
                             {user.first_name[0]}
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium text-sm">
+                          <p className="font-medium text-sm text-foreground">
                             {user.last_name} {user.first_name}
                           </p>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Mail className="h-4 w-4 text-slate-400" />
+                      <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                        <Mail className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                         {user.email}
                       </div>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Phone className="h-4 w-4 text-slate-400" />
+                      <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                        <Phone className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                         {user.phone}
                       </div>
                     </TableCell>
@@ -287,8 +287,8 @@ export default function UsersPage() {
                         variant="outline"
                         className={
                           user.is_active
-                            ? "bg-green-100 text-green-700 border-green-200"
-                            : "bg-red-100 text-red-700 border-red-200"
+                            ? "bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
+                            : "bg-red-100 text-red-700 border-red-200 dark:bg-red-900 dark:text-red-300 dark:border-red-800"
                         }
                       >
                         {user.is_active ? "Активен" : "Не активен"}
@@ -297,15 +297,16 @@ export default function UsersPage() {
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon-sm">
+                          <Button variant="ghost" size="icon-sm" className="dark:text-foreground">
                             <MoreVertical className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
+                        <DropdownMenuContent align="end" className="dark:bg-card dark:border-slate-700">
                           <DropdownMenuItem
                             onClick={() =>
                               router.push(`/dashboard/users/${user.id}`)
                             }
+                            className="dark:text-foreground dark:focus:bg-slate-800"
                           >
                             <Eye className="h-4 w-4 mr-2" />
                             Просмотр
@@ -314,11 +315,12 @@ export default function UsersPage() {
                             onClick={() =>
                               router.push(`/dashboard/users/${user.id}/edit`)
                             }
+                            className="dark:text-foreground dark:focus:bg-slate-800"
                           >
                             <Pencil className="h-4 w-4 mr-2" />
                             Редактировать
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-red-600">
+                          <DropdownMenuItem className="text-red-600 dark:text-red-400 dark:focus:bg-slate-800">
                             <Trash2 className="h-4 w-4 mr-2" />
                             Удалить
                           </DropdownMenuItem>

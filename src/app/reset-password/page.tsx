@@ -33,22 +33,22 @@ export default function ResetPasswordPage() {
 
   if (isReset) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-12">
         <div className="w-full max-w-md">
           {/* Card */}
-          <div className="rounded-xl border bg-white p-6 shadow-sm text-center">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+          <div className="rounded-xl border bg-white dark:bg-slate-900 dark:border-slate-800 p-6 shadow-sm text-center">
+            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+              <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
             </div>
-            
-            <h2 className="text-2xl font-bold tracking-tight">Пароль изменён</h2>
-            <p className="mt-3 text-sm text-slate-600">
+
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Пароль изменён</h2>
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
               Ваш пароль успешно сброшен. Теперь вы можете войти с новым паролем.
             </p>
 
             <div className="mt-6">
               <Link href="/login">
-                <Button className="w-full h-10 bg-brand-600 text-white hover:bg-brand-700">
+                <Button className="w-full h-10 bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-600 dark:text-white dark:hover:bg-brand-700">
                   Войти в систему
                 </Button>
               </Link>
@@ -60,14 +60,14 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-12">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm">
+        <div className="rounded-xl border bg-white dark:bg-slate-900 dark:border-slate-800 p-6 shadow-sm">
           {/* Header */}
           <div className="mb-6 text-center">
-            <h2 className="text-2xl font-bold tracking-tight">Новый пароль</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Новый пароль</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
               Придумайте надёжный пароль для вашего аккаунта
             </p>
           </div>
@@ -76,20 +76,20 @@ export default function ResetPasswordPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Error Message */}
             {error && (
-              <div className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
+              <div className="rounded-lg bg-red-50 dark:bg-red-950 p-4 text-sm text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900">
                 {error}
               </div>
             )}
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Новый пароль
               </label>
               <div className="mt-2">
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <Lock className="h-5 w-5 text-slate-400" />
+                    <Lock className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                   </div>
                   <Input
                     id="password"
@@ -103,7 +103,7 @@ export default function ResetPasswordPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -117,13 +117,13 @@ export default function ResetPasswordPage() {
 
             {/* Confirm Password */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
                 Подтвердите пароль
               </label>
               <div className="mt-2">
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <Lock className="h-5 w-5 text-slate-400" />
+                    <Lock className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                   </div>
                   <Input
                     id="confirmPassword"
@@ -137,7 +137,7 @@ export default function ResetPasswordPage() {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
                   >
                     {showConfirmPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -148,7 +148,7 @@ export default function ResetPasswordPage() {
                 </div>
               </div>
               {confirmPassword && password === confirmPassword && (
-                <p className="mt-2 text-xs text-green-600 flex items-center gap-1">
+                <p className="mt-2 text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
                   <CheckCircle className="h-3 w-3" />
                   Пароли совпадают
                 </p>
@@ -159,7 +159,7 @@ export default function ResetPasswordPage() {
             <Button
               type="submit"
               disabled={isLoading || !password || !confirmPassword}
-              className="w-full h-10 bg-brand-600 text-white hover:bg-brand-700"
+              className="w-full h-10 bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-600 dark:text-white dark:hover:bg-brand-700 disabled:opacity-50"
             >
               {isLoading ? (
                 <>
@@ -178,7 +178,7 @@ export default function ResetPasswordPage() {
           {/* Back to Login */}
           <div className="mt-6 text-center">
             <Link href="/login">
-              <Button variant="ghost" className="text-slate-600">
+              <Button variant="ghost" className="text-slate-600 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800">
                 Вернуться ко входу
               </Button>
             </Link>

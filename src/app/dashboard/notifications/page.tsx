@@ -14,11 +14,11 @@ const notifications = [
 ];
 
 const typeColors: Record<string, string> = {
-  order: "bg-blue-100 text-blue-700",
-  update: "bg-yellow-100 text-yellow-700",
-  document: "bg-purple-100 text-purple-700",
-  client: "bg-green-100 text-green-700",
-  complete: "bg-green-100 text-green-700",
+  order: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  update: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+  document: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  client: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  complete: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
 };
 
 const typeLabels: Record<string, string> = {
@@ -37,8 +37,8 @@ export default function NotificationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold">Уведомления</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-foreground">Уведомления</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             {unreadCount} новых уведомлений
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function NotificationsPage() {
             <Check className="h-4 w-4" />
             <span className="ml-2">Прочитать все</span>
           </Button>
-          <Button size="sm" variant="outline" className="w-full sm:w-auto justify-center">
+          <Button size="sm" variant="outline" className="w-full sm:w-auto justify-center border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-foreground">
             <Trash2 className="h-4 w-4" />
             <span className="ml-2">Очистить</span>
           </Button>
@@ -58,7 +58,7 @@ export default function NotificationsPage() {
       <ScrollArea className="h-[calc(100vh-250px)]">
         <div className="space-y-2">
           {notifications.length === 0 ? (
-            <div className="text-center py-8 text-slate-500">
+            <div className="text-center py-8 text-slate-500 dark:text-slate-400">
               Нет уведомлений
             </div>
           ) : (
@@ -66,22 +66,24 @@ export default function NotificationsPage() {
               <div
                 key={notification.id}
                 className={`flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border transition-colors ${
-                  notification.read ? "bg-white" : "bg-slate-50"
-                } hover:bg-slate-100 cursor-pointer`}
+                  notification.read 
+                    ? "bg-white dark:bg-card" 
+                    : "bg-slate-50 dark:bg-card"
+                } hover:bg-slate-100 dark:hover:bg-accent/50 cursor-pointer`}
               >
                 <div className={`flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full shrink-0 ${typeColors[notification.type]}`}>
                   <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="font-medium truncate">{notification.title}</span>
+                    <span className="font-medium text-slate-900 dark:text-foreground truncate">{notification.title}</span>
                     {!notification.read && (
                       <Badge variant="secondary" className="text-xs">Новое</Badge>
                     )}
                     <Badge className={typeColors[notification.type]}>{typeLabels[notification.type]}</Badge>
                   </div>
-                  <p className="text-sm text-slate-600">{notification.description}</p>
-                  <p className="text-xs text-slate-400 mt-1">{notification.time}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{notification.description}</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">{notification.time}</p>
                 </div>
               </div>
             ))

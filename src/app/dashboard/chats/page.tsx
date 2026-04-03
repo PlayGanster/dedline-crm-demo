@@ -307,14 +307,13 @@ export default function ChatsPage() {
   return (
     <div className="flex h-[calc(100vh-8rem)] gap-4">
       {/* Список чатов */}
-      <Card className="w-80 flex flex-col bg-white dark:bg-card border-slate-200 dark:border-slate-700">
-        <div className="p-4 border-b border-slate-200 dark:border-slate-700">
+      <Card className="w-80 flex flex-col bg-white dark:bg-card border-border">
+        <div className="p-4 border-b border-border">
           <div className="flex items-center justify-between mb-3">
-            <h1 className="text-lg font-bold text-slate-900 dark:text-foreground">Чаты</h1>
+            <h1 className="text-lg font-bold text-foreground">Чаты</h1>
             <Button
               size="icon-sm"
               variant="outline"
-              className="dark:border-slate-700 dark:text-foreground"
               onClick={() => {
                 setShowNewChatDialog(true);
               }}
@@ -323,12 +322,12 @@ export default function ChatsPage() {
             </Button>
           </div>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Поиск чатов..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-9 dark:border-slate-700 dark:text-foreground dark:placeholder:text-slate-500"
+              className="pl-10 h-9"
             />
           </div>
         </div>
@@ -340,28 +339,28 @@ export default function ChatsPage() {
                 key={chat.id}
                 className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
                   selectedChat?.id === chat.id
-                    ? "bg-slate-100"
-                    : "hover:bg-slate-50"
+                    ? "bg-slate-100 dark:bg-accent"
+                    : "hover:bg-slate-50 dark:hover:bg-accent/50"
                 }`}
                 onClick={() => setSelectedChat(chat)}
               >
                 <Avatar className="h-10 w-10">
-                  <AvatarFallback className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                  <AvatarFallback>
                     {chat.user.last_name[0]}
                     {chat.user.first_name[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium text-sm text-slate-900 dark:text-foreground truncate">
+                    <p className="font-medium text-sm text-foreground truncate">
                       {chat.user.last_name} {chat.user.first_name}
                     </p>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                    <span className="text-xs text-muted-foreground">
                       {formatTime(chat.lastMessage?.created_at || "")}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                    <p className="text-xs text-muted-foreground truncate">
                       {chat.lastMessage?.content}
                     </p>
                     {chat.unreadCount && chat.unreadCount > 0 && (
@@ -378,20 +377,20 @@ export default function ChatsPage() {
       </Card>
 
       {/* Окно чата */}
-      <Card className="flex-1 flex flex-col bg-white dark:bg-card border-slate-200 dark:border-slate-700">
+      <Card className="flex-1 flex flex-col bg-white dark:bg-card border-border">
         {selectedChat ? (
           <>
             {/* Заголовок чата */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
+            <div className="flex items-center justify-between p-4 border-b border-border">
               <div className="flex items-center gap-3">
                 <Avatar className="h-10 w-10">
-                  <AvatarFallback className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                  <AvatarFallback>
                     {selectedChat.user.last_name[0]}
                     {selectedChat.user.first_name[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium text-slate-900 dark:text-foreground">
+                  <p className="font-medium text-foreground">
                     {selectedChat.user.last_name} {selectedChat.user.first_name}
                   </p>
                   <div className="flex items-center gap-1">
@@ -399,31 +398,31 @@ export default function ChatsPage() {
                       className={`w-2 h-2 rounded-full ${
                         selectedChat.user.online
                           ? "bg-green-500"
-                          : "bg-slate-400"
+                          : "bg-muted-foreground"
                       }`}
                     />
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-muted-foreground">
                       {selectedChat.user.online ? "Онлайн" : "Офлайн"}
                     </p>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Button size="icon-sm" variant="outline" className="dark:border-slate-700 dark:text-foreground">
+                <Button size="icon-sm" variant="outline">
                   <Phone className="h-4 w-4" />
                 </Button>
-                <Button size="icon-sm" variant="outline" className="dark:border-slate-700 dark:text-foreground">
+                <Button size="icon-sm" variant="outline">
                   <Video className="h-4 w-4" />
                 </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="icon-sm" variant="outline" className="dark:border-slate-700 dark:text-foreground">
+                    <Button size="icon-sm" variant="outline">
                       <MoreVertical className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem className="dark:text-foreground">Профиль</DropdownMenuItem>
-                    <DropdownMenuItem className="dark:text-foreground">Уведомления</DropdownMenuItem>
+                    <DropdownMenuItem>Профиль</DropdownMenuItem>
+                    <DropdownMenuItem>Уведомления</DropdownMenuItem>
                     <DropdownMenuItem className="text-red-600 dark:text-red-400">
                       Заблокировать
                     </DropdownMenuItem>
@@ -458,7 +457,7 @@ export default function ChatsPage() {
                       {/* Ответ на сообщение */}
                       {message.reply_to && (
                         <div
-                          className="flex items-start gap-2 p-2 bg-slate-100 dark:bg-slate-800 rounded-lg border-l-2 border-brand-600 cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                          className="flex items-start gap-2 p-2 bg-slate-100 dark:bg-accent rounded-lg border-l-2 border-brand-600 cursor-pointer hover:bg-slate-200 dark:hover:bg-accent/80 transition-colors"
                           onClick={() => {
                             const el = document.getElementById(
                               `message-${message.reply_to?.id}`
@@ -479,7 +478,7 @@ export default function ChatsPage() {
                             <p className="text-xs font-medium text-brand-600 mb-0.5">
                               {message.reply_to.sender_name}
                             </p>
-                            <p className="text-sm text-slate-600 line-clamp-2">
+                            <p className="text-sm text-slate-600 dark:text-muted-foreground line-clamp-2">
                               {message.reply_to.content}
                             </p>
                           </div>
@@ -493,7 +492,7 @@ export default function ChatsPage() {
                           className={`px-4 py-2 rounded-lg ${
                             message.sender_id === 1
                               ? "bg-brand-600 text-white"
-                              : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-foreground"
+                              : "bg-slate-100 dark:bg-accent text-slate-900 dark:text-foreground"
                           }`}
                         >
                           <p className="text-sm">{message.content}</p>
@@ -556,13 +555,13 @@ export default function ChatsPage() {
 
                             if (isAudio) {
                               return (
-                                <div key={att.id} className="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg min-w-[200px]">
+                                <div key={att.id} className="flex items-center gap-3 p-3 bg-white dark:bg-accent rounded-lg min-w-[200px]">
                                   <div className="w-10 h-10 bg-brand-100 dark:bg-brand-900/20 rounded-full flex items-center justify-center">
                                     <MusicIcon className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-slate-900 dark:text-foreground truncate">{att.original_name}</p>
-                                    <p className="text-xs text-slate-500 dark:text-slate-400">{formatFileSize(att.size)}</p>
+                                    <p className="text-xs text-slate-500 dark:text-muted-foreground">{formatFileSize(att.size)}</p>
                                   </div>
                                 </div>
                               );
@@ -574,14 +573,14 @@ export default function ChatsPage() {
                                 href={att.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg min-w-[200px] hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                className="flex items-center gap-3 p-3 bg-white dark:bg-accent rounded-lg min-w-[200px] hover:bg-slate-50 dark:hover:bg-accent/80 transition-colors"
                               >
                                 <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
                                   <FileIcon className="w-5 h-5 text-slate-500 dark:text-slate-400" />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <p className="text-sm font-medium text-slate-900 dark:text-foreground truncate">{att.original_name}</p>
-                                  <p className="text-xs text-slate-500 dark:text-slate-400">{formatFileSize(att.size)}</p>
+                                  <p className="text-xs text-slate-500 dark:text-muted-foreground">{formatFileSize(att.size)}</p>
                                 </div>
                               </a>
                             );
@@ -591,11 +590,7 @@ export default function ChatsPage() {
 
                       {/* Время и статус */}
                       <div
-                        className={`flex items-center gap-1 text-xs ${
-                          message.sender_id === 1
-                            ? "text-slate-500"
-                            : "text-slate-500"
-                        }`}
+                        className={`flex items-center gap-1 text-xs text-muted-foreground`}
                       >
                         <span>{formatTime(message.created_at)}</span>
                         {message.sender_id === 1 && (
@@ -612,7 +607,7 @@ export default function ChatsPage() {
                                 />
                               </>
                             ) : (
-                              <Check size={14} className="text-slate-400" />
+                              <Check size={14} className="text-muted-foreground" />
                             )}
                           </div>
                         )}
@@ -626,18 +621,18 @@ export default function ChatsPage() {
 
             {/* Зона загрузки файлов */}
             {pendingFiles.length > 0 && (
-              <div className="border-t p-4 bg-slate-50 dark:bg-slate-800">
+              <div className="border-t p-4 bg-slate-50 dark:bg-accent">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[300px] overflow-y-auto">
                   {pendingFiles.map((file, index) => {
                     const isImage = file.type?.startsWith("image/");
                     const isVideo = file.type?.startsWith("video/");
                     const isAudio = file.type?.startsWith("audio/");
-                    const previewUrl = isImage ? URL.createObjectURL(file) : null;
+                    const previewUrl = isImage ? URL.createObjectURL(file) : undefined;
 
                     return (
                       <div
                         key={index}
-                        className="relative group bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden"
+                        className="relative group bg-white dark:bg-card rounded-lg border border-border overflow-hidden"
                       >
                         {isImage ? (
                           <div className="relative aspect-square">
@@ -651,7 +646,7 @@ export default function ChatsPage() {
                                 onClick={() =>
                                   setPendingFiles(pendingFiles.filter((_, i) => i !== index))
                                 }
-                                className="bg-white dark:bg-slate-800 rounded-full p-2 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                                className="bg-white dark:bg-card rounded-full p-2 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                               >
                                 <X className="h-4 w-4 text-red-600 dark:text-red-400" />
                               </button>
@@ -673,15 +668,15 @@ export default function ChatsPage() {
                                 <FileIcon className="w-6 h-6 text-slate-500 dark:text-slate-400" />
                               </div>
                             )}
-                            <p className="text-xs text-slate-500 dark:text-slate-400 text-center truncate w-full px-2">{file.name}</p>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">{formatFileSize(file.size)}</p>
+                            <p className="text-xs text-slate-500 dark:text-muted-foreground text-center truncate w-full px-2">{file.name}</p>
+                            <p className="text-xs text-slate-500 dark:text-muted-foreground">{formatFileSize(file.size)}</p>
                             <button
                               onClick={() =>
                                 setPendingFiles(pendingFiles.filter((_, i) => i !== index))
                               }
-                              className="absolute top-2 right-2 bg-white/80 dark:bg-slate-800/80 rounded-full p-1 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors opacity-0 group-hover:opacity-100"
+                              className="absolute top-2 right-2 bg-white/80 dark:bg-card/80 rounded-full p-1 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors opacity-0 group-hover:opacity-100"
                             >
-                              <X className="h-3 w-3 text-red-600" />
+                              <X className="h-3 w-3 text-red-600 dark:text-red-400" />
                             </button>
                           </div>
                         )}
@@ -690,14 +685,14 @@ export default function ChatsPage() {
                   })}
                 </div>
                 <div className="flex items-center justify-between mt-3 pt-3 border-t">
-                  <span className="text-sm text-slate-500">
+                  <span className="text-sm text-slate-500 dark:text-muted-foreground">
                     Выбрано файлов: {pendingFiles.length}
                   </span>
                   <Button
                     size="sm"
                     variant="ghost"
                     onClick={() => setPendingFiles([])}
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                    className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
                   >
                     <X className="h-4 w-4 mr-2" />
                     Очистить все
@@ -708,7 +703,7 @@ export default function ChatsPage() {
 
             {/* Ответ на сообщение */}
             {replyToMessage && (
-              <div className="border-t p-3 bg-slate-50 dark:bg-slate-800">
+              <div className="border-t p-3 bg-slate-50 dark:bg-accent">
                 <div className="flex items-start gap-2">
                   <Reply size={14} className="text-brand-600 dark:text-brand-400 mt-1" />
                   <div className="flex-1">
@@ -716,13 +711,13 @@ export default function ChatsPage() {
                       {replyToMessage.sender.first_name}{" "}
                       {replyToMessage.sender.last_name}
                     </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                    <p className="text-sm text-slate-600 dark:text-muted-foreground line-clamp-2">
                       {replyToMessage.content}
                     </p>
                   </div>
                   <button
                     onClick={() => setReplyToMessage(null)}
-                    className="text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-400"
+                    className="text-slate-400 dark:text-muted-foreground hover:text-slate-600 dark:hover:text-foreground"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -731,7 +726,7 @@ export default function ChatsPage() {
             )}
 
             {/* Ввод сообщения */}
-            <div className="flex items-center gap-2 p-4 border-t border-slate-200 dark:border-slate-700">
+            <div className="flex items-center gap-2 p-4 border-t border-border">
               <input
                 type="file"
                 ref={fileInputRef}
@@ -744,7 +739,7 @@ export default function ChatsPage() {
                 size="icon"
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
-                className="shrink-0 dark:border-slate-700 dark:text-foreground"
+                className="shrink-0"
               >
                 <Paperclip size={20} />
               </Button>
@@ -758,14 +753,13 @@ export default function ChatsPage() {
                   }
                 }}
                 placeholder="Введите сообщение..."
-                className="flex-1 dark:border-slate-700 dark:text-foreground dark:placeholder:text-slate-500"
+                className="flex-1"
               />
               {pendingFiles.length > 0 && (
                 <Button
                   size="icon-sm"
                   variant="ghost"
                   onClick={() => setPendingFiles([])}
-                  className="dark:text-foreground"
                 >
                   <X size={16} />
                 </Button>
@@ -783,7 +777,7 @@ export default function ChatsPage() {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-slate-500 dark:text-slate-400">
+          <div className="flex-1 flex items-center justify-center text-slate-500 dark:text-muted-foreground">
             <div className="text-center">
               <MessageSquare className="h-16 w-16 mx-auto mb-4 opacity-50" />
               <p>Выберите чат для начала общения</p>
@@ -794,32 +788,32 @@ export default function ChatsPage() {
 
       {/* Диалог нового чата */}
       <Dialog open={showNewChatDialog} onOpenChange={setShowNewChatDialog}>
-        <DialogContent className="max-w-md bg-white dark:bg-card border-slate-200 dark:border-slate-700">
+        <DialogContent className="max-w-md bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle className="text-slate-900 dark:text-foreground">Новый чат</DialogTitle>
+            <DialogTitle className="text-foreground">Новый чат</DialogTitle>
           </DialogHeader>
           <ScrollArea className="h-[300px]">
             <div className="space-y-2">
               {mockChats.map((chat) => (
                 <div
                   key={chat.id}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-accent cursor-pointer"
                   onClick={() => {
                     setSelectedChat(chat);
                     setShowNewChatDialog(false);
                   }}
                 >
                   <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    <AvatarFallback>
                       {chat.user.last_name[0]}
                       {chat.user.first_name[0]}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <p className="font-medium text-sm text-slate-900 dark:text-foreground">
+                    <p className="font-medium text-sm text-foreground">
                       {chat.user.last_name} {chat.user.first_name}
                     </p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{chat.user.email}</p>
+                    <p className="text-xs text-slate-500 dark:text-muted-foreground">{chat.user.email}</p>
                   </div>
                 </div>
               ))}
@@ -828,7 +822,7 @@ export default function ChatsPage() {
           <Button
             variant="outline"
             onClick={() => setShowNewChatDialog(false)}
-            className="w-full dark:border-slate-700 dark:text-foreground"
+            className="w-full"
           >
             Закрыть
           </Button>
@@ -837,7 +831,7 @@ export default function ChatsPage() {
 
       {/* Диалог просмотра вложений */}
       <Dialog open={attachmentViewerOpen} onOpenChange={setAttachmentViewerOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] p-0 overflow-hidden">
+        <DialogContent className="max-w-4xl max-h-[90vh] p-0 overflow-hidden bg-white dark:bg-card">
           <div className="flex items-center justify-between p-4 border-b">
             <h3 className="font-semibold truncate">
               {currentAttachments[currentAttachmentIndex]?.original_name}
@@ -847,7 +841,7 @@ export default function ChatsPage() {
             {currentAttachments.length > 1 ? (
               <Carousel
                 opts={{
-                  initialSnap: currentAttachmentIndex,
+                  startIndex: currentAttachmentIndex,
                 }}
                 className="w-full"
               >
@@ -873,9 +867,9 @@ export default function ChatsPage() {
                             />
                           ) : (
                             <div className="text-center">
-                              <FileIcon className="h-24 w-24 mx-auto text-slate-300 mb-4" />
-                              <p className="font-medium">{att.original_name}</p>
-                              <p className="text-sm text-slate-500">{formatFileSize(att.size)}</p>
+                              <FileIcon className="h-24 w-24 mx-auto text-slate-300 dark:text-muted-foreground mb-4" />
+                              <p className="font-medium text-foreground">{att.original_name}</p>
+                              <p className="text-sm text-slate-500 dark:text-muted-foreground">{formatFileSize(att.size)}</p>
                               <Button
                                 variant="outline"
                                 size="sm"
@@ -914,9 +908,9 @@ export default function ChatsPage() {
                   />
                 ) : (
                   <div className="text-center">
-                    <FileIcon className="h-24 w-24 mx-auto text-slate-300 mb-4" />
-                    <p className="font-medium">{currentAttachments[0].original_name}</p>
-                    <p className="text-sm text-slate-500">{formatFileSize(currentAttachments[0].size)}</p>
+                    <FileIcon className="h-24 w-24 mx-auto text-slate-300 dark:text-muted-foreground mb-4" />
+                    <p className="font-medium text-foreground">{currentAttachments[0].original_name}</p>
+                    <p className="text-sm text-slate-500 dark:text-muted-foreground">{formatFileSize(currentAttachments[0].size)}</p>
                     <Button
                       variant="outline"
                       size="sm"

@@ -76,10 +76,10 @@ const statusLabels: Record<string, string> = {
 };
 
 const statusColors: Record<string, string> = {
-  NEW: "bg-blue-100 text-blue-700 border-blue-200",
-  IN_PROGRESS: "bg-yellow-100 text-yellow-700 border-yellow-200",
-  COMPLETED: "bg-green-100 text-green-700 border-green-200",
-  CANCELLED: "bg-red-100 text-red-700 border-red-200",
+  NEW: "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-800",
+  IN_PROGRESS: "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-800",
+  COMPLETED: "bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800",
+  CANCELLED: "bg-red-100 text-red-700 border-red-200 dark:bg-red-900 dark:text-red-300 dark:border-red-800",
 };
 
 const mockApplication = {
@@ -617,12 +617,13 @@ export default function ApplicationProfilePage() {
             variant="outline"
             size="icon-sm"
             onClick={() => router.push("/dashboard/requests")}
+            className="dark:border-slate-700 dark:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold">Заявка №{application.id}</h1>
-            <p className="text-sm text-slate-500">{application.title}</p>
+            <h1 className="text-xl font-bold text-foreground">Заявка №{application.id}</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{application.title}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -630,13 +631,14 @@ export default function ApplicationProfilePage() {
             variant="outline"
             size="icon-sm"
             onClick={() => router.push(`/dashboard/requests/${id}/edit`)}
+            className="dark:border-slate-700 dark:text-foreground"
           >
             <Pencil className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
             size="icon-sm"
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
             onClick={() => setIsDeleteOpen(true)}
           >
             <Trash2 className="h-4 w-4" />
@@ -645,18 +647,18 @@ export default function ApplicationProfilePage() {
       </div>
 
       {/* Main Info Card */}
-      <Card>
+      <Card className="bg-white dark:bg-card">
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
-                <h2 className="text-2xl font-bold">{application.title}</h2>
+                <h2 className="text-2xl font-bold text-foreground">{application.title}</h2>
                 <Badge variant="outline" className={statusColors[application.status]}>
                   {statusLabels[application.status]}
                 </Badge>
               </div>
             </div>
-            <div className="flex items-center gap-2 text-slate-500">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
               <MapPin className="h-4 w-4" />
               <span>{application.city}</span>
             </div>
@@ -666,54 +668,54 @@ export default function ApplicationProfilePage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50">
-                <DollarSign className="h-5 w-5 text-blue-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950">
+                <DollarSign className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Бюджет</p>
-                <p className="text-lg font-bold">{totalAmount.toLocaleString("ru-RU")} ₽</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Бюджет</p>
+                <p className="text-lg font-bold text-foreground">{totalAmount.toLocaleString("ru-RU")} ₽</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50">
-                <CreditCard className="h-5 w-5 text-green-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-50 dark:bg-green-950">
+                <CreditCard className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Выплачено</p>
-                <p className="text-lg font-bold text-green-600">{totalPaid.toLocaleString("ru-RU")} ₽</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Выплачено</p>
+                <p className="text-lg font-bold text-green-600 dark:text-green-400">{totalPaid.toLocaleString("ru-RU")} ₽</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50">
-                <DollarSign className="h-5 w-5 text-purple-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50 dark:bg-purple-950">
+                <DollarSign className="h-5 w-5 text-purple-600 dark:text-purple-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Остаток</p>
-                <p className="text-lg font-bold text-purple-600">{budgetRemaining.toLocaleString("ru-RU")} ₽</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Остаток</p>
+                <p className="text-lg font-bold text-purple-600 dark:text-purple-400">{budgetRemaining.toLocaleString("ru-RU")} ₽</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-white dark:bg-card">
           <CardContent className="pt-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50">
-                <Users className="h-5 w-5 text-orange-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-50 dark:bg-orange-950">
+                <Users className="h-5 w-5 text-orange-600 dark:text-orange-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-500">Исполнители</p>
-                <p className="text-lg font-bold">{performers.length} чел.</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Исполнители</p>
+                <p className="text-lg font-bold text-foreground">{performers.length} чел.</p>
               </div>
             </div>
           </CardContent>
@@ -749,25 +751,25 @@ export default function ApplicationProfilePage() {
         <TabsContent value="info" className="mt-4">
           <div className="grid gap-4 md:grid-cols-3">
             {/* Team Card */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
+                <CardTitle className="text-base flex items-center gap-2 text-foreground">
                   <Users className="h-5 w-5" />
                   Команда
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {/* Manager */}
-                <div className="p-3 rounded-lg border bg-slate-50">
+                <div className="p-3 rounded-lg border bg-slate-50 dark:bg-slate-800">
                   <div className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold text-sm">
+                      <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold text-sm dark:bg-blue-900 dark:text-blue-300">
                         {application.manager.last_name[0]}
                         {application.manager.first_name[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-sm">
+                      <p className="font-medium text-sm text-foreground">
                         {application.manager.last_name} {application.manager.first_name}{" "}
                         {application.manager.middle_name}
                       </p>
@@ -779,16 +781,16 @@ export default function ApplicationProfilePage() {
                 </div>
 
                 {/* Supervisor */}
-                <div className="p-3 rounded-lg border bg-slate-50">
+                <div className="p-3 rounded-lg border bg-slate-50 dark:bg-slate-800">
                   <div className="flex items-center gap-3">
                     <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-purple-100 text-purple-700 font-semibold text-sm">
+                      <AvatarFallback className="bg-purple-100 text-purple-700 font-semibold text-sm dark:bg-purple-900 dark:text-purple-300">
                         {application.supervisor.last_name[0]}
                         {application.supervisor.first_name[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium text-sm">
+                      <p className="font-medium text-sm text-foreground">
                         {application.supervisor.last_name} {application.supervisor.first_name}{" "}
                         {application.supervisor.middle_name}
                       </p>
@@ -802,9 +804,9 @@ export default function ApplicationProfilePage() {
             </Card>
 
             {/* Client Card */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
+                <CardTitle className="text-base flex items-center gap-2 text-foreground">
                   <User className="h-5 w-5" />
                   Клиент
                 </CardTitle>
@@ -812,12 +814,12 @@ export default function ApplicationProfilePage() {
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-12 w-12">
-                    <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold">
+                    <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold dark:bg-brand-900 dark:text-brand-300">
                       {application.client.fio?.[0] || application.client.company_name?.[0] || "К"}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium">
+                    <p className="font-medium text-foreground">
                       {application.client.type === "INDIVIDUAL"
                         ? application.client.fio
                         : application.client.company_name}
@@ -829,33 +831,33 @@ export default function ApplicationProfilePage() {
                 </div>
                 <div className="space-y-2 pt-2 border-t">
                   <div className="flex items-center gap-2 text-sm">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50">
-                      <Mail className="h-4 w-4 text-blue-600" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950">
+                      <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <span>{application.client.email || "—"}</span>
+                    <span className="text-foreground">{application.client.email || "—"}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50">
-                      <Phone className="h-4 w-4 text-green-600" />
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50 dark:bg-green-950">
+                      <Phone className="h-4 w-4 text-green-600 dark:text-green-400" />
                     </div>
-                    <span>{application.client.phone || "—"}</span>
+                    <span className="text-foreground">{application.client.phone || "—"}</span>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Details Card */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2">
+                <CardTitle className="text-base flex items-center gap-2 text-foreground">
                   <FileText className="h-5 w-5" />
                   Детали заявки
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                  <span className="text-sm text-slate-500">Создана</span>
-                  <span className="text-sm font-medium">
+                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <span className="text-sm text-slate-500 dark:text-slate-400">Создана</span>
+                  <span className="text-sm font-medium text-foreground">
                     {new Date(application.created_at).toLocaleDateString("ru-RU", {
                       day: "2-digit",
                       month: "2-digit",
@@ -865,9 +867,9 @@ export default function ApplicationProfilePage() {
                     })}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                  <span className="text-sm text-slate-500">Обновлена</span>
-                  <span className="text-sm font-medium">
+                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <span className="text-sm text-slate-500 dark:text-slate-400">Обновлена</span>
+                  <span className="text-sm font-medium text-foreground">
                     {new Date(application.updated_at).toLocaleDateString("ru-RU", {
                       day: "2-digit",
                       month: "2-digit",
@@ -882,9 +884,9 @@ export default function ApplicationProfilePage() {
           </div>
 
           {/* Comment Card */}
-          <Card className="mt-4">
+          <Card className="mt-4 bg-white dark:bg-card">
             <CardHeader>
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-base flex items-center gap-2 text-foreground">
                 <FileText className="h-5 w-5" />
                 Комментарий менеджера
               </CardTitle>
@@ -908,9 +910,9 @@ export default function ApplicationProfilePage() {
 
         {/* Tasks Tab */}
         <TabsContent value="tasks" className="mt-4">
-          <Card>
+          <Card className="bg-white dark:bg-card">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+              <CardTitle className="flex items-center justify-between text-foreground">
                 <span className="flex items-center gap-2">
                   <Briefcase className="h-5 w-5" />
                   Задачи
@@ -930,7 +932,7 @@ export default function ApplicationProfilePage() {
                 >
                   {/* Task Header - Always Visible */}
                   <div
-                    className="p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors"
+                    className="p-4 bg-slate-50 dark:bg-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
                     onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)}
                   >
                     <div className="flex items-start justify-between">
@@ -940,10 +942,10 @@ export default function ApplicationProfilePage() {
                             variant="outline"
                             className={
                               taskStatuses[task.id] === "COMPLETED"
-                                ? "bg-green-100 text-green-700 border-green-200"
+                                ? "bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
                                 : taskStatuses[task.id] === "CANCELLED"
-                                ? "bg-red-100 text-red-700 border-red-200"
-                                : "bg-blue-100 text-blue-700 border-blue-200"
+                                ? "bg-red-100 text-red-700 border-red-200 dark:bg-red-900 dark:text-red-300 dark:border-red-800"
+                                : "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-800"
                             }
                           >
                             {taskStatuses[task.id] === "COMPLETED" ? (
@@ -963,18 +965,18 @@ export default function ApplicationProfilePage() {
                               </>
                             )}
                           </Badge>
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-xs dark:border-slate-700 dark:text-foreground">
                             {task.service_type_label}
                           </Badge>
                         </div>
-                        <p className="font-semibold mb-1">{task.title}</p>
-                        <p className="text-sm text-slate-600">{task.work_front}</p>
+                        <p className="font-semibold mb-1 text-foreground">{task.title}</p>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{task.work_front}</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <Button
                           size="icon-sm"
                           variant="ghost"
-                          className="h-8 w-8"
+                          className="h-8 w-8 dark:text-foreground"
                           onClick={(e) => {
                             e.stopPropagation();
                             setExpandedTaskId(expandedTaskId === task.id ? null : task.id);
@@ -989,20 +991,20 @@ export default function ApplicationProfilePage() {
                         <div className="flex items-center gap-1">
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <Button size="icon-sm" variant="outline" onClick={(e) => e.stopPropagation()}>
+                              <Button size="icon-sm" variant="outline" onClick={(e) => e.stopPropagation()} className="dark:border-slate-700 dark:text-foreground">
                                 <ChevronDown className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "IN_PROGRESS")}>
+                            <DropdownMenuContent align="end" className="dark:bg-card dark:border-slate-700">
+                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "IN_PROGRESS")} className="dark:text-foreground dark:focus:bg-slate-800">
                                 <Circle className="h-4 w-4 mr-2" />
                                 В работе
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "COMPLETED")}>
+                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "COMPLETED")} className="dark:text-foreground dark:focus:bg-slate-800">
                                 <CheckCircle2 className="h-4 w-4 mr-2 text-green-600" />
                                 Выполнено
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "CANCELLED")}>
+                              <DropdownMenuItem onClick={() => handleToggleTaskStatus(task.id, "CANCELLED")} className="dark:text-foreground dark:focus:bg-slate-800">
                                 <X className="h-4 w-4 mr-2 text-red-600" />
                                 Отменено
                               </DropdownMenuItem>
@@ -1011,10 +1013,10 @@ export default function ApplicationProfilePage() {
                           <Button size="icon-sm" variant="outline" onClick={(e) => {
                             e.stopPropagation();
                             handleOpenTaskDialog(task);
-                          }}>
+                          }} className="dark:border-slate-700 dark:text-foreground">
                             <Pencil className="h-4 w-4" />
                           </Button>
-                          <Button size="icon-sm" variant="outline" onClick={(e) => e.stopPropagation()}>
+                          <Button size="icon-sm" variant="outline" onClick={(e) => e.stopPropagation()} className="dark:border-slate-700 dark:text-foreground">
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
@@ -1030,69 +1032,69 @@ export default function ApplicationProfilePage() {
                         : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
-                    <div className="min-h-0 p-4 border-t">
+                    <div className="min-h-0 p-4 border-t dark:border-slate-700">
                       {/* Location Info */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                        <div className="p-2 rounded bg-slate-50">
-                          <div className="flex items-center gap-1 text-xs text-slate-500 mb-1">
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                          <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mb-1">
                             <MapPin className="h-3 w-3" />
                             Место работы
                           </div>
-                          <p className="text-sm font-medium">{task.work_location}</p>
+                          <p className="text-sm font-medium text-foreground">{task.work_location}</p>
                         </div>
-                        <div className="p-2 rounded bg-slate-50">
-                          <div className="flex items-center gap-1 text-xs text-slate-500 mb-1">
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                          <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mb-1">
                             <Users className="h-3 w-3" />
                             Место сбора
                           </div>
-                          <p className="text-sm font-medium">{task.meeting_point}</p>
+                          <p className="text-sm font-medium text-foreground">{task.meeting_point}</p>
                         </div>
                       </div>
-                      
+
                       {/* Supervisor */}
                       {task.supervisor && (
-                        <div className="p-2 rounded bg-blue-50 mb-3">
-                          <div className="flex items-center gap-1 text-xs text-blue-600 mb-1">
+                        <div className="p-2 rounded bg-blue-50 dark:bg-blue-950 mb-3">
+                          <div className="flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 mb-1">
                             <User className="h-3 w-3" />
                             Ответственное лицо
                           </div>
                           <div className="flex items-center gap-2">
-                            <p className="text-sm font-medium">{task.supervisor.name}</p>
-                            <div className="flex items-center gap-1 text-xs text-blue-600">
+                            <p className="text-sm font-medium text-foreground">{task.supervisor.name}</p>
+                            <div className="flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400">
                               <Phone className="h-3 w-3" />
                               <span>{task.supervisor.phone}</span>
                             </div>
                           </div>
                         </div>
                       )}
-                      
+
                       {/* Financial Info */}
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                        <div className="p-2 rounded bg-slate-50">
-                          <p className="text-xs text-slate-500">Дата</p>
-                          <p className="font-medium flex items-center gap-1">
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                          <p className="text-xs text-slate-500 dark:text-slate-400">Дата</p>
+                          <p className="font-medium flex items-center gap-1 text-foreground">
                             <Calendar className="h-3 w-3" />
                             {new Date(task.start_date).toLocaleDateString("ru-RU")}
                           </p>
                         </div>
-                        <div className="p-2 rounded bg-slate-50">
-                          <p className="text-xs text-slate-500">Время</p>
-                          <p className="font-medium flex items-center gap-1">
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                          <p className="text-xs text-slate-500 dark:text-slate-400">Время</p>
+                          <p className="font-medium flex items-center gap-1 text-foreground">
                             <Clock className="h-3 w-3" />
                             {task.time_from} - {task.time_to}
                           </p>
                         </div>
-                        <div className="p-2 rounded bg-slate-50">
-                          <p className="text-xs text-slate-500">Ставка</p>
-                          <p className="font-medium">{task.rate} ₽/{task.payment_unit === "hour" ? "час" : "смена"}</p>
+                        <div className="p-2 rounded bg-slate-50 dark:bg-slate-800">
+                          <p className="text-xs text-slate-500 dark:text-slate-400">Ставка</p>
+                          <p className="font-medium text-foreground">{task.rate} ₽/{task.payment_unit === "hour" ? "час" : "смена"}</p>
                         </div>
-                        <div className="p-2 rounded bg-brand-50 border border-brand-200">
-                          <p className="text-xs text-brand-600">Цена для заказчика</p>
-                          <p className="font-bold text-brand-700">{task.customer_price.toLocaleString("ru-RU")} ₽/{task.payment_unit === "hour" ? "час" : "смена"}</p>
+                        <div className="p-2 rounded bg-brand-50 dark:bg-brand-950 border border-brand-200 dark:border-brand-800">
+                          <p className="text-xs text-brand-600 dark:text-brand-400">Цена для заказчика</p>
+                          <p className="font-bold text-brand-700 dark:text-brand-300">{task.customer_price.toLocaleString("ru-RU")} ₽/{task.payment_unit === "hour" ? "час" : "смена"}</p>
                         </div>
                       </div>
                       {task.comment && (
-                        <div className="mt-3 p-2 rounded bg-slate-50 text-sm text-slate-600">
+                        <div className="mt-3 p-2 rounded bg-slate-50 dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-400">
                           <strong>Примечание:</strong> {task.comment}
                         </div>
                       )}
@@ -1106,9 +1108,9 @@ export default function ApplicationProfilePage() {
 
         {/* Performers Tab */}
         <TabsContent value="performers" className="mt-4">
-          <Card>
+          <Card className="bg-white dark:bg-card">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+              <CardTitle className="flex items-center justify-between text-foreground">
                 <span className="flex items-center gap-2">
                   <Users className="h-5 w-5" />
                   Исполнители
@@ -1123,26 +1125,26 @@ export default function ApplicationProfilePage() {
               {performers.map((p) => (
                 <div
                   key={p.id}
-                  className="flex items-center justify-between p-4 rounded-lg border hover:bg-slate-50 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <Avatar className="h-12 w-12">
-                      <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold">
+                      <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold dark:bg-brand-900 dark:text-brand-300">
                         {p.performer.last_name[0]}
                         {p.performer.first_name[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-medium">
+                      <p className="font-medium text-foreground">
                         {p.performer.last_name} {p.performer.first_name}{" "}
                         {p.performer.middle_name}
                       </p>
-                      <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                         <span>{p.performer.professions?.[0]?.name || "—"}</span>
                         {p.performer.is_verified && (
                           <>
                             <span>•</span>
-                            <span className="flex items-center gap-1 text-green-600">
+                            <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
                               <CheckCircle2 className="h-3 w-3" />
                               Проверен
                             </span>
@@ -1151,11 +1153,11 @@ export default function ApplicationProfilePage() {
                       </div>
                       {p.task_id && (
                         <div
-                          className="flex items-center gap-1 mt-1 text-xs cursor-pointer hover:text-brand-700 transition-colors"
+                          className="flex items-center gap-1 mt-1 text-xs cursor-pointer hover:text-brand-700 dark:hover:text-brand-400 transition-colors"
                           onClick={() => handleTaskClick(p.task_id)}
                         >
-                          <Briefcase className="h-3 w-3 text-brand-600" />
-                          <span className="text-brand-600 font-medium">
+                          <Briefcase className="h-3 w-3 text-brand-600 dark:text-brand-400" />
+                          <span className="text-brand-600 dark:text-brand-400 font-medium">
                             {p.task_title}
                           </span>
                         </div>
@@ -1163,13 +1165,13 @@ export default function ApplicationProfilePage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Button size="icon-sm" variant="outline" title="Просмотр">
+                    <Button size="icon-sm" variant="outline" title="Просмотр" className="dark:border-slate-700 dark:text-foreground">
                       <Eye className="h-4 w-4" />
                     </Button>
-                    <Button size="icon-sm" variant="outline" title="Email">
+                    <Button size="icon-sm" variant="outline" title="Email" className="dark:border-slate-700 dark:text-foreground">
                       <Mail className="h-4 w-4" />
                     </Button>
-                    <Button size="icon-sm" variant="outline" title="Телефон">
+                    <Button size="icon-sm" variant="outline" title="Телефон" className="dark:border-slate-700 dark:text-foreground">
                       <Phone className="h-4 w-4" />
                     </Button>
                   </div>
@@ -1183,9 +1185,9 @@ export default function ApplicationProfilePage() {
         <TabsContent value="payments" className="mt-4">
           <div className="space-y-4">
             {/* Performers Shifts */}
-            <Card>
+            <Card className="bg-white dark:bg-card">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle className="flex items-center justify-between text-foreground">
                   <span>Выплаты исполнителям</span>
                   <Button size="sm" onClick={handleOpenAddShiftDialog}>
                     <Plus className="h-4 w-4 mr-2" />
@@ -1195,50 +1197,50 @@ export default function ApplicationProfilePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 {performers.length === 0 ? (
-                  <p className="text-center text-slate-500 py-4">Нет прикреплённых исполнителей</p>
+                  <p className="text-center text-slate-500 dark:text-slate-400 py-4">Нет прикреплённых исполнителей</p>
                 ) : (
                   performers.map((p) => {
                     const performerShifts = shifts.filter(s => s.performer_id === p.performer.id);
                     const totalPerformer = performerShifts.reduce((sum, s) => sum + s.amount, 0);
-                    
+
                     return (
-                      <div key={p.performer.id} className="border rounded-lg p-4 space-y-3">
-                        <div className="flex items-center justify-between pb-3 border-b">
+                      <div key={p.performer.id} className="border rounded-lg p-4 space-y-3 dark:border-slate-700">
+                        <div className="flex items-center justify-between pb-3 border-b dark:border-slate-700">
                           <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10">
-                              <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold text-sm">
+                              <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold text-sm dark:bg-brand-900 dark:text-brand-300">
                                 {p.performer.last_name[0]}{p.performer.first_name[0]}
                               </AvatarFallback>
                             </Avatar>
                             <div>
-                              <p className="font-medium">{p.performer.last_name} {p.performer.first_name}</p>
-                              <p className="text-sm text-slate-500">{p.performer.phone}</p>
+                              <p className="font-medium text-foreground">{p.performer.last_name} {p.performer.first_name}</p>
+                              <p className="text-sm text-slate-500 dark:text-slate-400">{p.performer.phone}</p>
                             </div>
                           </div>
                           <div className="text-right">
-                            <p className="text-sm text-slate-500">Выплачено</p>
-                            <p className="text-lg font-bold text-green-600">{totalPerformer.toLocaleString("ru-RU")} ₽</p>
+                            <p className="text-sm text-slate-500 dark:text-slate-400">Выплачено</p>
+                            <p className="text-lg font-bold text-green-600 dark:text-green-400">{totalPerformer.toLocaleString("ru-RU")} ₽</p>
                           </div>
                         </div>
 
                         {performerShifts.length > 0 && (
                           <div className="space-y-2">
-                            <p className="text-sm font-medium">Смены:</p>
+                            <p className="text-sm font-medium text-foreground">Смены:</p>
                             {performerShifts.map((shift) => (
-                              <div key={shift.id} className="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
+                              <div key={shift.id} className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-800 rounded-lg">
                                 <div className="flex items-center gap-4">
                                   <div className="flex items-center gap-2">
-                                    <Calendar size={14} className="text-slate-400" />
-                                    <span className="text-sm">{new Date(shift.date).toLocaleDateString("ru-RU")}</span>
+                                    <Calendar size={14} className="text-slate-400 dark:text-slate-500" />
+                                    <span className="text-sm text-foreground">{new Date(shift.date).toLocaleDateString("ru-RU")}</span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <Clock size={14} className="text-slate-400" />
-                                    <span className="text-sm">{shift.hours} ч.</span>
+                                    <Clock size={14} className="text-slate-400 dark:text-slate-500" />
+                                    <span className="text-sm text-foreground">{shift.hours} ч.</span>
                                   </div>
                                   {shift.task_id && (
                                     <Badge
                                       variant="outline"
-                                      className="text-xs cursor-pointer hover:bg-brand-50"
+                                      className="text-xs cursor-pointer hover:bg-brand-50 dark:hover:bg-brand-950 dark:border-slate-700 dark:text-foreground"
                                       onClick={() => handleTaskClick(shift.task_id)}
                                     >
                                       <Briefcase size={12} className="mr-1" />
@@ -1247,11 +1249,11 @@ export default function ApplicationProfilePage() {
                                   )}
                                 </div>
                                 <div className="flex items-center gap-3">
-                                  <span className="font-medium text-sm">{shift.amount.toLocaleString("ru-RU")} ₽</span>
+                                  <span className="font-medium text-sm text-foreground">{shift.amount.toLocaleString("ru-RU")} ₽</span>
                                   {shift.receipt_file ? (
                                     <Badge
                                       variant="outline"
-                                      className="bg-green-100 text-green-700 border-green-200 cursor-pointer hover:bg-green-200"
+                                      className="bg-green-100 text-green-700 border-green-200 cursor-pointer hover:bg-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         // View receipt
@@ -1263,7 +1265,7 @@ export default function ApplicationProfilePage() {
                                   ) : (
                                     <Badge
                                       variant="outline"
-                                      className="bg-yellow-100 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-200"
+                                      className="bg-yellow-100 text-yellow-700 border-yellow-200 cursor-pointer hover:bg-yellow-200 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-800"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         handleOpenUploadReceiptDialog(shift.id);
@@ -1276,7 +1278,7 @@ export default function ApplicationProfilePage() {
                                   <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="text-red-500 hover:text-red-600 hover:bg-red-50 h-8"
+                                    className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950 h-8"
                                   >
                                     <Trash2 size={14} className="mr-1" />
                                     Удалить
@@ -1297,9 +1299,9 @@ export default function ApplicationProfilePage() {
 
         {/* Documents Tab */}
         <TabsContent value="documents" className="mt-4">
-          <Card>
+          <Card className="bg-white dark:bg-card">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+              <CardTitle className="flex items-center justify-between text-foreground">
                 <span className="flex items-center gap-2">
                   <Upload className="h-5 w-5" />
                   Документы
@@ -1313,13 +1315,13 @@ export default function ApplicationProfilePage() {
             <CardContent className="space-y-3">
               {documents.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 mb-4">
-                    <FileText className="h-8 w-8 text-slate-400" />
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <FileText className="h-8 w-8 text-slate-400 dark:text-slate-500" />
                   </div>
-                  <p className="text-slate-700 font-medium">
+                  <p className="text-slate-700 font-medium dark:text-slate-300">
                     Документы не загружены
                   </p>
-                  <p className="text-sm text-slate-500 mt-1">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                     Загрузите документы заявки
                   </p>
                 </div>
@@ -1330,8 +1332,8 @@ export default function ApplicationProfilePage() {
                       key={doc.id}
                       className={`p-4 rounded-lg border transition-colors ${
                         doc.is_verified
-                          ? "border-green-200 bg-green-50/50"
-                          : "border-slate-200 bg-white"
+                          ? "border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/50"
+                          : "border-slate-200 bg-white dark:bg-card"
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -1353,13 +1355,13 @@ export default function ApplicationProfilePage() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-slate-900">
+                              <span className="font-semibold text-slate-900 dark:text-foreground">
                                 {doc.original_name}
                               </span>
                               {doc.is_verified ? (
                                 <Badge
                                   variant="outline"
-                                  className="bg-green-100 text-green-700 border-green-200"
+                                  className="bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
                                 >
                                   <CheckCircle2 className="h-3 w-3 mr-1" />
                                   Проверен
@@ -1367,7 +1369,7 @@ export default function ApplicationProfilePage() {
                               ) : (
                                 <Badge
                                   variant="outline"
-                                  className="bg-yellow-100 text-yellow-700 border-yellow-200"
+                                  className="bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-800"
                                 >
                                   <AlertCircle className="h-3 w-3 mr-1" />
                                   Не проверен
@@ -1375,9 +1377,9 @@ export default function ApplicationProfilePage() {
                               )}
                             </div>
                             {doc.description && (
-                              <p className="text-sm text-slate-600 mb-1">{doc.description}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">{doc.description}</p>
                             )}
-                            <div className="flex items-center gap-3 text-xs text-slate-500">
+                            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
                               <span className="font-mono">{doc.size}</span>
                               <span>•</span>
                               <span>
@@ -1400,7 +1402,7 @@ export default function ApplicationProfilePage() {
                                 <Button
                                   size="icon-sm"
                                   variant="outline"
-                                  className="h-9 w-9 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200"
+                                  className="h-9 w-9 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200 dark:text-green-400 dark:hover:bg-green-950 dark:border-green-800"
                                 >
                                   <CheckCircle size={16} />
                                 </Button>
@@ -1414,7 +1416,7 @@ export default function ApplicationProfilePage() {
                                 <Button
                                   size="icon-sm"
                                   variant="outline"
-                                  className="h-9 w-9 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50 border-yellow-200"
+                                  className="h-9 w-9 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:hover:bg-yellow-950 dark:border-yellow-800"
                                 >
                                   <AlertCircle size={16} />
                                 </Button>
@@ -1427,7 +1429,7 @@ export default function ApplicationProfilePage() {
                               <Button
                                 size="icon-sm"
                                 variant="outline"
-                                className="h-9 w-9 text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200"
+                                className="h-9 w-9 text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200 dark:text-blue-400 dark:hover:bg-blue-950 dark:border-blue-800"
                               >
                                 <Upload size={16} className="rotate-180" />
                               </Button>
@@ -1825,10 +1827,10 @@ export default function ApplicationProfilePage() {
 
       {/* Add Performer Dialog */}
       <Dialog open={isAddPerformerDialogOpen} onOpenChange={setIsAddPerformerDialogOpen}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto content-scroll">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto content-scroll bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle>Добавить исполнителя</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-foreground">Добавить исполнителя</DialogTitle>
+            <DialogDescription className="text-slate-500 dark:text-slate-400">
               Шаг {addPerformerStep} из 2
             </DialogDescription>
           </DialogHeader>
@@ -1837,29 +1839,29 @@ export default function ApplicationProfilePage() {
           {addPerformerStep === 1 && (
             <div className="space-y-4 py-4">
               <div className="space-y-2">
-                <Label className="text-sm font-semibold">Выберите задачу</Label>
+                <Label className="text-sm font-semibold text-foreground">Выберите задачу</Label>
                 <div className="grid gap-3">
                   {tasks.map((task) => (
                     <div
                       key={task.id}
                       className={`p-4 rounded-lg border cursor-pointer transition-colors ${
                         selectedTaskId === task.id
-                          ? "border-brand-500 bg-brand-50"
-                          : "hover:bg-slate-50"
+                          ? "border-brand-500 bg-brand-50 dark:border-brand-700 dark:bg-brand-950"
+                          : "hover:bg-slate-50 dark:hover:bg-slate-800"
                       }`}
                       onClick={() => handleSelectTask(task.id)}
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-semibold">{task.title}</p>
-                          <p className="text-sm text-slate-500">{task.work_front}</p>
+                          <p className="font-semibold text-foreground">{task.title}</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">{task.work_front}</p>
                         </div>
                         <Badge
                           variant="outline"
                           className={
                             taskStatuses[task.id] === "COMPLETED"
-                              ? "bg-green-100 text-green-700 border-green-200"
-                              : "bg-blue-100 text-blue-700 border-blue-200"
+                              ? "bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
+                              : "bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:border-blue-800"
                           }
                         >
                           {taskStatuses[task.id] === "COMPLETED" ? "Выполнено" : "В работе"}
@@ -1878,38 +1880,38 @@ export default function ApplicationProfilePage() {
               {/* Filters */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div className="space-y-2">
-                  <Label className="text-xs">Поиск</Label>
+                  <Label className="text-xs text-foreground">Поиск</Label>
                   <Input
                     placeholder="ФИО..."
                     value={performerSearch}
                     onChange={(e) => setPerformerSearch(e.target.value)}
-                    className="h-9"
+                    className="h-9 dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs">Город</Label>
+                  <Label className="text-xs text-foreground">Город</Label>
                   <Select value={performerCityFilter} onValueChange={setPerformerCityFilter}>
-                    <SelectTrigger className="h-9">
+                    <SelectTrigger className="h-9 dark:bg-slate-800 dark:border-slate-700 dark:text-foreground">
                       <SelectValue placeholder="Все города" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="dark:bg-card dark:border-slate-700">
                       <SelectItem value="all">Все города</SelectItem>
                       {cities.map((city) => (
-                        <SelectItem key={city} value={city}>{city}</SelectItem>
+                        <SelectItem key={city} value={city} className="dark:text-foreground dark:focus:bg-slate-800">{city}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-xs">Профессия</Label>
+                  <Label className="text-xs text-foreground">Профессия</Label>
                   <Select value={performerProfessionFilter} onValueChange={setPerformerProfessionFilter}>
-                    <SelectTrigger className="h-9">
+                    <SelectTrigger className="h-9 dark:bg-slate-800 dark:border-slate-700 dark:text-foreground">
                       <SelectValue placeholder="Все профессии" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="dark:bg-card dark:border-slate-700">
                       <SelectItem value="all">Все профессии</SelectItem>
                       {professions.map((prof) => (
-                        <SelectItem key={prof} value={prof}>{prof}</SelectItem>
+                        <SelectItem key={prof} value={prof} className="dark:text-foreground dark:focus:bg-slate-800">{prof}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -1920,33 +1922,33 @@ export default function ApplicationProfilePage() {
               <ScrollArea className="h-[300px]">
                 <div className="space-y-2">
                   {filteredPerformers.length === 0 ? (
-                    <div className="text-center py-8 text-slate-500">
+                    <div className="text-center py-8 text-slate-500 dark:text-slate-400">
                       Исполнители не найдены
                     </div>
                   ) : (
                     filteredPerformers.map((p) => (
                       <div
                         key={p.id}
-                        className="flex items-center justify-between p-3 rounded-lg border hover:bg-slate-50 transition-colors"
+                        className="flex items-center justify-between p-3 rounded-lg border hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
                       >
                         <div className="flex items-center gap-3">
                           <Avatar className="h-10 w-10">
-                            <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold text-sm">
+                            <AvatarFallback className="bg-brand-100 text-brand-700 font-semibold text-sm dark:bg-brand-900 dark:text-brand-300">
                               {p.last_name[0]}{p.first_name[0]}
                             </AvatarFallback>
                           </Avatar>
                           <div>
-                            <p className="font-medium text-sm">
+                            <p className="font-medium text-sm text-foreground">
                               {p.last_name} {p.first_name} {p.middle_name}
                             </p>
-                            <div className="flex items-center gap-2 text-xs text-slate-500">
+                            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                               <span>{p.professions[0]?.name || "—"}</span>
                               <span>•</span>
                               <span>{p.city}</span>
                               {p.is_verified && (
                                 <>
                                   <span>•</span>
-                                  <span className="text-green-600">Проверен</span>
+                                  <span className="text-green-600 dark:text-green-400">Проверен</span>
                                 </>
                               )}
                             </div>
@@ -1955,7 +1957,7 @@ export default function ApplicationProfilePage() {
                         <Button
                           size="sm"
                           onClick={() => handleAddPerformer(p.id)}
-                          className="bg-brand-600 text-white hover:bg-brand-700"
+                          className="bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
                         >
                           Добавить
                         </Button>
@@ -1973,6 +1975,7 @@ export default function ApplicationProfilePage() {
                 variant="outline"
                 size="sm"
                 onClick={() => setAddPerformerStep(1)}
+                className="dark:border-slate-700 dark:text-foreground"
               >
                 Назад
               </Button>
@@ -1981,6 +1984,7 @@ export default function ApplicationProfilePage() {
               variant="outline"
               size="sm"
               onClick={() => setIsAddPerformerDialogOpen(false)}
+              className="dark:border-slate-700 dark:text-foreground"
             >
               Отмена
             </Button>
@@ -1990,28 +1994,28 @@ export default function ApplicationProfilePage() {
 
       {/* Add Shift Dialog */}
       <Dialog open={isAddShiftDialogOpen} onOpenChange={setIsAddShiftDialogOpen}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle>Добавить смену</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-foreground">Добавить смену</DialogTitle>
+            <DialogDescription className="text-slate-500 dark:text-slate-400">
               Добавьте информацию о выплате исполнителю
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>Исполнитель</Label>
+              <Label className="text-foreground">Исполнитель</Label>
               <Select
                 value={shiftForm.performer_id.toString()}
                 onValueChange={(v) => handleShiftPerformerChange(parseInt(v))}
               >
-                <SelectTrigger>
+                <SelectTrigger className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground">
                   <SelectValue placeholder="Выберите исполнителя" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="dark:bg-card dark:border-slate-700">
                   {performers.map((p) => {
                     const rate = getPerformerRate(p.performer.id);
                     return (
-                      <SelectItem key={p.performer.id} value={p.performer.id.toString()}>
+                      <SelectItem key={p.performer.id} value={p.performer.id.toString()} className="dark:text-foreground dark:focus:bg-slate-800">
                         {p.performer.last_name} {p.performer.first_name} ({rate} ₽/час)
                       </SelectItem>
                     );
@@ -2020,39 +2024,41 @@ export default function ApplicationProfilePage() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Дата</Label>
+              <Label className="text-foreground">Дата</Label>
               <Input
                 type="date"
                 value={shiftForm.date}
                 onChange={(e) => setShiftForm({ ...shiftForm, date: e.target.value })}
+                className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Часов</Label>
+                <Label className="text-foreground">Часов</Label>
                 <Input
                   type="number"
                   min="0"
                   value={shiftForm.hours}
                   onChange={(e) => handleShiftHoursChange(parseInt(e.target.value))}
+                  className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                 />
               </div>
               <div className="space-y-2">
-                <Label>Сумма (₽)</Label>
+                <Label className="text-foreground">Сумма (₽)</Label>
                 <Input
                   type="number"
                   value={shiftForm.amount}
                   onChange={(e) => setShiftForm({ ...shiftForm, amount: parseInt(e.target.value) })}
-                  className="bg-slate-50"
+                  className="bg-slate-50 dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   readOnly
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label>Чек (необязательно)</Label>
+              <Label className="text-foreground">Чек (необязательно)</Label>
               <div
                 className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors ${
-                  shiftForm.receipt ? "border-brand-500 bg-brand-50" : "border-slate-300 hover:border-slate-400"
+                  shiftForm.receipt ? "border-brand-500 bg-brand-50 dark:border-brand-700 dark:bg-brand-950" : "border-slate-300 hover:border-slate-400 dark:border-slate-600 dark:hover:border-slate-500"
                 }`}
               >
                 <input
@@ -2068,33 +2074,33 @@ export default function ApplicationProfilePage() {
                 <label htmlFor="shift-receipt-upload" className="cursor-pointer">
                   {shiftForm.receipt ? (
                     <div className="flex flex-col items-center gap-2">
-                      <CheckCircle2 className="h-6 w-6 text-brand-600" />
-                      <p className="text-sm font-medium text-brand-700">{shiftForm.receipt.name}</p>
-                      <p className="text-xs text-slate-500">{(shiftForm.receipt.size / 1024).toFixed(1)} KB</p>
+                      <CheckCircle2 className="h-6 w-6 text-brand-600 dark:text-brand-400" />
+                      <p className="text-sm font-medium text-brand-700 dark:text-brand-300">{shiftForm.receipt.name}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{(shiftForm.receipt.size / 1024).toFixed(1)} KB</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2">
-                      <Upload className="h-6 w-6 text-slate-400" />
-                      <p className="text-sm font-medium text-slate-700">Прикрепить чек</p>
-                      <p className="text-xs text-slate-500">JPG, PNG, PDF</p>
+                      <Upload className="h-6 w-6 text-slate-400 dark:text-slate-500" />
+                      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Прикрепить чек</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">JPG, PNG, PDF</p>
                     </div>
                   )}
                 </label>
               </div>
             </div>
             {shiftForm.performer_id > 0 && (
-              <div className="p-3 rounded-lg bg-slate-50 text-sm">
-                <p className="text-slate-500">
-                  Ставка: <span className="font-medium text-slate-700">{getPerformerRate(shiftForm.performer_id)} ₽/час</span>
+              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 text-sm">
+                <p className="text-slate-500 dark:text-slate-400">
+                  Ставка: <span className="font-medium text-slate-700 dark:text-slate-300">{getPerformerRate(shiftForm.performer_id)} ₽/час</span>
                 </p>
-                <p className="text-slate-500">
-                  Расчёт: <span className="font-medium text-slate-700">{getPerformerRate(shiftForm.performer_id)} × {shiftForm.hours || 0} = {(getPerformerRate(shiftForm.performer_id) * (shiftForm.hours || 0)).toLocaleString("ru-RU")} ₽</span>
+                <p className="text-slate-500 dark:text-slate-400">
+                  Расчёт: <span className="font-medium text-slate-700 dark:text-slate-300">{getPerformerRate(shiftForm.performer_id)} × {shiftForm.hours || 0} = {(getPerformerRate(shiftForm.performer_id) * (shiftForm.hours || 0)).toLocaleString("ru-RU")} ₽</span>
                 </p>
               </div>
             )}
           </div>
           <DialogFooter className="flex-col sm:flex-row gap-2">
-            <Button variant="outline" size="sm" onClick={() => setIsAddShiftDialogOpen(false)}>
+            <Button variant="outline" size="sm" onClick={() => setIsAddShiftDialogOpen(false)} className="dark:border-slate-700 dark:text-foreground">
               Отмена
             </Button>
             <Button

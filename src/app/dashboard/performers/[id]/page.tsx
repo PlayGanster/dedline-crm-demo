@@ -242,10 +242,10 @@ const typeIcons: Record<string, any> = {
 };
 
 const requestStatusColors: Record<string, string> = {
-  completed: "bg-green-100 text-green-700",
-  in_progress: "bg-yellow-100 text-yellow-700",
-  pending: "bg-blue-100 text-blue-700",
-  cancelled: "bg-red-100 text-red-700",
+  completed: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+  in_progress: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
+  pending: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+  cancelled: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
 };
 
 const requestStatusLabels: Record<string, string> = {
@@ -384,7 +384,7 @@ export default function PerformerProfilePage() {
           </Button>
           <div>
             <h1 className="text-xl font-bold">Исполнитель</h1>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               {performer.last_name} {performer.first_name}
             </p>
           </div>
@@ -405,7 +405,7 @@ export default function PerformerProfilePage() {
               variant="outline"
               size="sm"
               onClick={handleVerify}
-              className="hidden sm:inline-flex bg-brand-600 text-white hover:bg-brand-700"
+              className="hidden sm:inline-flex bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
             >
               <ShieldCheck className="h-4 w-4 mr-2" />
               Проверить
@@ -421,7 +421,7 @@ export default function PerformerProfilePage() {
           <Button
             variant="outline"
             size="icon-sm"
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
             onClick={() => setIsDeleteOpen(true)}
           >
             <Trash2 className="h-4 w-4" />
@@ -436,15 +436,15 @@ export default function PerformerProfilePage() {
             {/* Avatar Section */}
             <div className="flex flex-col items-center gap-3">
               <Avatar className="h-24 w-24">
-                <AvatarFallback className="text-3xl bg-brand-100 text-brand-700 font-semibold">
+                <AvatarFallback className="text-3xl bg-brand-100 text-brand-700 font-semibold dark:bg-brand-900 dark:text-brand-300">
                   {performer.last_name[0]}
                   {performer.first_name[0]}
                 </AvatarFallback>
               </Avatar>
               <div className="flex items-center gap-1 text-center">
-                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400 dark:fill-yellow-500 dark:text-yellow-500" />
                 <span className="font-semibold">{performer.rating}</span>
-                <span className="text-slate-500 text-sm">
+                <span className="text-slate-500 text-sm dark:text-slate-400">
                   ({performer.orders_count} заказов)
                 </span>
               </div>
@@ -458,7 +458,7 @@ export default function PerformerProfilePage() {
                   {performer.last_name} {performer.first_name}{" "}
                   {performer.middle_name}
                 </h2>
-                <div className="flex items-center gap-2 mt-1 text-slate-500">
+                <div className="flex items-center gap-2 mt-1 text-slate-500 dark:text-slate-400">
                   <Briefcase className="h-4 w-4" />
                   <span className="text-sm">
                     {performer.professions?.map((p: any) => p.name).join(", ")}
@@ -472,8 +472,8 @@ export default function PerformerProfilePage() {
                   variant="outline"
                   className={
                     isVerified
-                      ? "bg-green-50 text-green-700 border-green-200"
-                      : "bg-slate-50 text-slate-700 border-slate-200"
+                      ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-400 dark:border-green-900"
+                      : "bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700"
                   }
                 >
                   {isVerified ? (
@@ -487,15 +487,15 @@ export default function PerformerProfilePage() {
                   variant="outline"
                   className={
                     performer.is_active
-                      ? "bg-green-50 text-green-700 border-green-200"
-                      : "bg-red-50 text-red-700 border-red-200"
+                      ? "bg-green-50 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-400 dark:border-green-900"
+                      : "bg-red-50 text-red-700 border-red-200 dark:bg-red-950 dark:text-red-400 dark:border-red-900"
                   }
                 >
                   {performer.is_active ? "Активен" : "Не активен"}
                 </Badge>
                 <Badge
                   variant="secondary"
-                  className="bg-slate-100 text-slate-700"
+                  className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300"
                 >
                   <Smartphone className="h-3 w-3 mr-1" />
                   {performer.source === "APP" ? "Приложение" : "CRM"}
@@ -505,40 +505,40 @@ export default function PerformerProfilePage() {
               {/* Contact Grid */}
               <div className="grid grid-cols-2 gap-3 pt-4 border-t">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50">
-                    <Mail className="h-4 w-4 text-blue-600" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950">
+                    <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500">Email</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Email</p>
                     <p className="text-sm font-medium truncate">
                       {performer.email}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50">
-                    <Phone className="h-4 w-4 text-green-600" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-50 dark:bg-green-950">
+                    <Phone className="h-4 w-4 text-green-600 dark:text-green-400" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500">Телефон</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Телефон</p>
                     <p className="text-sm font-medium">{performer.phone}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50">
-                    <MapPin className="h-4 w-4 text-purple-600" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 dark:bg-purple-950">
+                    <MapPin className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500">Город</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Город</p>
                     <p className="text-sm font-medium">{performer.city}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100">
-                    <Hash className="h-4 w-4 text-slate-600" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+                    <Hash className="h-4 w-4 text-slate-600 dark:text-slate-400" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs text-slate-500">ID</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">ID</p>
                     <p className="text-sm font-medium">#{performer.id}</p>
                   </div>
                 </div>
@@ -586,13 +586,13 @@ export default function PerformerProfilePage() {
             <CardContent className="pt-6">
               {requisites.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 mb-4">
-                    <CreditCard className="h-8 w-8 text-slate-400" />
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <CreditCard className="h-8 w-8 text-slate-400 dark:text-slate-500" />
                   </div>
-                  <p className="text-slate-700 font-medium">
+                  <p className="text-slate-700 font-medium dark:text-slate-300">
                     Реквизиты не добавлены
                   </p>
-                  <p className="text-sm text-slate-500 mt-1">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                     Добавьте реквизиты для выплат исполнителю
                   </p>
                 </div>
@@ -625,8 +625,8 @@ export default function PerformerProfilePage() {
                             key={req.id}
                             className={`p-4 rounded-lg border ${
                               req.is_default
-                                ? "border-brand-200 bg-brand-50"
-                                : "bg-white"
+                                ? "border-brand-200 bg-brand-50 dark:border-brand-800 dark:bg-brand-950"
+                                : "bg-white dark:bg-card"
                             }`}
                           >
                             <div className="flex items-start justify-between mb-3">
@@ -634,7 +634,7 @@ export default function PerformerProfilePage() {
                                 {req.is_default && (
                                   <Star
                                     size={16}
-                                    className="text-brand-600 fill-brand-600"
+                                    className="text-brand-600 fill-brand-600 dark:text-brand-400 dark:fill-brand-400"
                                   />
                                 )}
                                 <span className="font-medium">
@@ -643,7 +643,7 @@ export default function PerformerProfilePage() {
                                 {req.is_default && (
                                   <Badge
                                     variant="secondary"
-                                    className="bg-brand-100 text-brand-700"
+                                    className="bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300"
                                   >
                                     По умолчанию
                                   </Badge>
@@ -656,7 +656,7 @@ export default function PerformerProfilePage() {
                                 <Button
                                   size="icon-sm"
                                   variant="ghost"
-                                  className="text-red-600"
+                                  className="text-red-600 dark:text-red-400"
                                 >
                                   <Trash2 size={16} />
                                 </Button>
@@ -664,7 +664,7 @@ export default function PerformerProfilePage() {
                             </div>
 
                             {type === "CARD" && (
-                              <div className="text-sm text-slate-500 space-y-1">
+                              <div className="text-sm text-slate-500 dark:text-slate-400 space-y-1">
                                 {req.card_number && (
                                   <p>Номер карты: {req.card_number}</p>
                                 )}
@@ -678,7 +678,7 @@ export default function PerformerProfilePage() {
                             )}
 
                             {type === "SBP" && (
-                              <div className="text-sm text-slate-500">
+                              <div className="text-sm text-slate-500 dark:text-slate-400">
                                 {req.sbp_phone && (
                                   <p>Телефон: {req.sbp_phone}</p>
                                 )}
@@ -686,7 +686,7 @@ export default function PerformerProfilePage() {
                             )}
 
                             {type === "REQUISITES" && (
-                              <div className="text-sm text-slate-500 space-y-1">
+                              <div className="text-sm text-slate-500 dark:text-slate-400 space-y-1">
                                 {req.inn && <p>ИНН: {req.inn}</p>}
                                 {req.ogrnip && <p>ОГРНИП: {req.ogrnip}</p>}
                                 {req.account_number && (
@@ -727,13 +727,13 @@ export default function PerformerProfilePage() {
             <CardContent className="pt-6">
               {documents.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 mb-4">
-                    <FileBadge className="h-8 w-8 text-slate-400" />
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                    <FileBadge className="h-8 w-8 text-slate-400 dark:text-slate-500" />
                   </div>
-                  <p className="text-slate-700 font-medium">
+                  <p className="text-slate-700 font-medium dark:text-slate-300">
                     Документы не загружены
                   </p>
-                  <p className="text-sm text-slate-500 mt-1">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                     Загрузите документы исполнителя
                   </p>
                 </div>
@@ -744,8 +744,8 @@ export default function PerformerProfilePage() {
                       key={doc.id}
                       className={`p-4 rounded-lg border transition-colors ${
                         doc.is_verified
-                          ? "border-green-200 bg-green-50/50"
-                          : "border-slate-200 bg-white"
+                          ? "border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/50"
+                          : "border-slate-200 bg-white dark:bg-card"
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -753,27 +753,27 @@ export default function PerformerProfilePage() {
                           <div
                             className={`flex h-12 w-12 items-center justify-center rounded-lg ${
                               doc.is_verified
-                                ? "bg-green-100"
-                                : "bg-slate-100"
+                                ? "bg-green-100 dark:bg-green-900"
+                                : "bg-slate-100 dark:bg-slate-800"
                             }`}
                           >
                             <File
                               className={`h-6 w-6 ${
                                 doc.is_verified
-                                  ? "text-green-600"
-                                  : "text-slate-600"
+                                  ? "text-green-600 dark:text-green-400"
+                                  : "text-slate-600 dark:text-slate-400"
                               }`}
                             />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-slate-900">
+                              <span className="font-semibold text-slate-900 dark:text-slate-100">
                                 {doc.name}
                               </span>
                               {doc.is_verified ? (
                                 <Badge
                                   variant="outline"
-                                  className="bg-green-100 text-green-700 border-green-200"
+                                  className="bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300 dark:border-green-800"
                                 >
                                   <CheckCircle className="h-3 w-3 mr-1" />
                                   Проверен
@@ -781,7 +781,7 @@ export default function PerformerProfilePage() {
                               ) : (
                                 <Badge
                                   variant="outline"
-                                  className="bg-yellow-100 text-yellow-700 border-yellow-200"
+                                  className="bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900 dark:text-yellow-300 dark:border-yellow-800"
                                 >
                                   <AlertCircle className="h-3 w-3 mr-1" />
                                   Не проверен
@@ -789,9 +789,9 @@ export default function PerformerProfilePage() {
                               )}
                             </div>
                             {doc.description && (
-                              <p className="text-sm text-slate-600 mb-1">{doc.description}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 mb-1">{doc.description}</p>
                             )}
-                            <div className="flex items-center gap-3 text-xs text-slate-500">
+                            <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
                               <span className="font-mono">{doc.size}</span>
                               <span>•</span>
                               <span>
@@ -814,7 +814,7 @@ export default function PerformerProfilePage() {
                                 <Button
                                   size="icon-sm"
                                   variant="outline"
-                                  className="h-9 w-9 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200"
+                                  className="h-9 w-9 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200 dark:text-green-400 dark:hover:bg-green-950 dark:border-green-800"
                                   onClick={() => handleVerifyDocument(doc.id)}
                                 >
                                   <CheckCircle size={16} />
@@ -829,7 +829,7 @@ export default function PerformerProfilePage() {
                                 <Button
                                   size="icon-sm"
                                   variant="outline"
-                                  className="h-9 w-9 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50 border-yellow-200"
+                                  className="h-9 w-9 text-yellow-600 hover:text-yellow-700 hover:bg-yellow-50 border-yellow-200 dark:text-yellow-400 dark:hover:bg-yellow-950 dark:border-yellow-800"
                                   onClick={() => handleVerifyDocument(doc.id)}
                                 >
                                   <AlertCircle size={16} />
@@ -843,7 +843,7 @@ export default function PerformerProfilePage() {
                               <Button
                                 size="icon-sm"
                                 variant="outline"
-                                className="h-9 w-9 text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200"
+                                className="h-9 w-9 text-blue-600 hover:text-blue-700 hover:bg-blue-50 border-blue-200 dark:text-blue-400 dark:hover:bg-blue-950 dark:border-blue-800"
                                 onClick={() => handleDownloadDocument(doc.id)}
                               >
                                 <Upload size={16} className="rotate-180" />
@@ -856,7 +856,7 @@ export default function PerformerProfilePage() {
                               <Button
                                 size="icon-sm"
                                 variant="outline"
-                                className="h-9 w-9 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
+                                className="h-9 w-9 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200 dark:text-red-400 dark:hover:bg-red-950 dark:border-red-800"
                                 onClick={() => handleDeleteDocument(doc.id)}
                               >
                                 <Trash2 size={16} />
@@ -890,13 +890,13 @@ export default function PerformerProfilePage() {
                   <div className="divide-y">
                     {notes.length === 0 ? (
                       <div className="flex flex-col items-center justify-center py-16 text-center px-4">
-                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-100 to-brand-50 mb-4">
-                          <FileText className="h-10 w-10 text-brand-600" />
+                        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-brand-100 to-brand-50 dark:from-brand-900 dark:to-brand-950 mb-4">
+                          <FileText className="h-10 w-10 text-brand-600 dark:text-brand-400" />
                         </div>
-                        <p className="text-slate-700 font-semibold">
+                        <p className="text-slate-700 font-semibold dark:text-slate-300">
                           Заметок пока нет
                         </p>
-                        <p className="text-sm text-slate-500 mt-2 max-w-xs">
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-xs">
                           Добавьте первую заметку об исполнителе, чтобы зафиксировать важную информацию
                         </p>
                       </div>
@@ -905,32 +905,32 @@ export default function PerformerProfilePage() {
                         {notes.map((note) => (
                           <div
                             key={note.id}
-                            className="group p-4 rounded-lg border border-slate-200 hover:border-brand-300 hover:bg-brand-50/30 transition-all"
+                            className="group p-4 rounded-lg border border-slate-200 hover:border-brand-300 hover:bg-brand-50/30 transition-all dark:border-slate-700 dark:hover:border-brand-700 dark:hover:bg-brand-950/30"
                           >
                             <div className="flex items-start justify-between gap-3 mb-3">
-                              <p className="text-sm text-slate-700 leading-relaxed">
+                              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                                 {note.text}
                               </p>
                               <Button
                                 size="icon-sm"
                                 variant="ghost"
-                                className="opacity-0 group-hover:opacity-100 transition-all h-8 w-8 shrink-0 hover:bg-red-50"
+                                className="opacity-0 group-hover:opacity-100 transition-all h-8 w-8 shrink-0 hover:bg-red-50 dark:hover:bg-red-950"
                                 onClick={() => handleDeleteNote(note.id)}
                               >
-                                <Trash2 className="h-4 w-4 text-red-500" />
+                                <Trash2 className="h-4 w-4 text-red-500 dark:text-red-400" />
                               </Button>
                             </div>
-                            <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
+                            <div className="flex items-center gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
                               <div className="flex items-center gap-2">
-                                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white text-xs font-medium shadow-sm">
+                                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 dark:from-brand-400 dark:to-brand-500 flex items-center justify-center text-white dark:text-slate-100 text-xs font-medium shadow-sm">
                                   {note.created_by.charAt(0)}
                                 </div>
-                                <span className="text-xs font-medium text-slate-700">
+                                <span className="text-xs font-medium text-slate-700 dark:text-slate-300">
                                   {note.created_by}
                                 </span>
                               </div>
-                              <span className="text-slate-300">•</span>
-                              <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                              <span className="text-slate-300 dark:text-slate-600">•</span>
+                              <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
                                 <Calendar className="h-3.5 w-3.5" />
                                 <span>
                                   {new Date(note.created_at).toLocaleDateString(
@@ -974,7 +974,7 @@ export default function PerformerProfilePage() {
                   <Button
                     onClick={handleAddNote}
                     disabled={!newNote.trim()}
-                    className="w-full bg-brand-600 hover:bg-brand-700"
+                    className="w-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
                     size="sm"
                   >
                     <Plus className="h-4 w-4 mr-2" />
@@ -996,13 +996,13 @@ export default function PerformerProfilePage() {
               <div className="divide-y">
                 {requests.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 mb-4">
-                      <Clock className="h-8 w-8 text-slate-400" />
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 mb-4">
+                      <Clock className="h-8 w-8 text-slate-400 dark:text-slate-500" />
                     </div>
-                    <p className="text-slate-700 font-medium">
+                    <p className="text-slate-700 font-medium dark:text-slate-300">
                       Нет заявок
                     </p>
-                    <p className="text-sm text-slate-500 mt-2">
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
                       У исполнителя пока нет заявок
                     </p>
                   </div>
@@ -1010,10 +1010,10 @@ export default function PerformerProfilePage() {
                   requests.map((req) => (
                     <div
                       key={req.id}
-                      className="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors cursor-pointer"
+                      className="flex items-center justify-between p-4 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-brand-600 shrink-0">
+                        <span className="text-sm font-medium text-brand-600 dark:text-brand-400 shrink-0">
                           {req.id}
                         </span>
                         <Badge
@@ -1026,17 +1026,17 @@ export default function PerformerProfilePage() {
                           <p className="text-sm font-medium">
                             {req.title}
                           </p>
-                          <p className="text-xs text-slate-500">
+                          <p className="text-xs text-slate-500 dark:text-slate-400">
                             {req.task}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="text-sm text-slate-500">
+                        <span className="text-sm text-slate-500 dark:text-slate-400">
                           {req.date} {req.time}
                         </span>
                         <span className="text-sm font-medium">{req.amount}</span>
-                        <ChevronRight className="h-4 w-4 text-slate-400" />
+                        <ChevronRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                       </div>
                     </div>
                   ))
@@ -1062,14 +1062,14 @@ export default function PerformerProfilePage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                    <span className="text-sm text-slate-500">Серия</span>
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                    <span className="text-sm text-slate-500 dark:text-slate-400">Серия</span>
                     <span className="text-sm font-semibold font-mono">
                       {performer.passport_series}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                    <span className="text-sm text-slate-500">Номер</span>
+                  <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                    <span className="text-sm text-slate-500 dark:text-slate-400">Номер</span>
                     <span className="text-sm font-semibold font-mono">
                       {performer.passport_number}
                     </span>
@@ -1087,16 +1087,16 @@ export default function PerformerProfilePage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                  <span className="text-sm text-slate-500">
+                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <span className="text-sm text-slate-500 dark:text-slate-400">
                     ID исполнителя
                   </span>
                   <span className="text-sm font-semibold font-mono">
                     #{performer.id}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                  <span className="text-sm text-slate-500">Создан</span>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <span className="text-sm text-slate-500 dark:text-slate-400">Создан</span>
                   <span className="text-sm font-medium">
                     {new Date(performer.created_at).toLocaleDateString(
                       "ru-RU",
@@ -1108,8 +1108,8 @@ export default function PerformerProfilePage() {
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50">
-                  <span className="text-sm text-slate-500">Обновлен</span>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-slate-50 dark:bg-slate-800">
+                  <span className="text-sm text-slate-500 dark:text-slate-400">Обновлен</span>
                   <span className="text-sm font-medium">
                     {new Date(performer.updated_at).toLocaleDateString(
                       "ru-RU",
@@ -1129,17 +1129,17 @@ export default function PerformerProfilePage() {
 
       {/* Requisite Dialog */}
       <Dialog open={isRequisiteDialogOpen} onOpenChange={setIsRequisiteDialogOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-lg bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle>Добавить реквизиты</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-foreground">Добавить реквизиты</DialogTitle>
+            <DialogDescription className="text-slate-500 dark:text-slate-400">
               Выберите тип реквизитов и заполните данные
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>Тип реквизитов</Label>
+              <Label className="text-foreground">Тип реквизитов</Label>
               <RadioGroup
                 value={requisiteType}
                 onValueChange={(v) =>
@@ -1148,30 +1148,30 @@ export default function PerformerProfilePage() {
                 className="flex gap-4"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="CARD" id="card" />
+                  <RadioGroupItem value="CARD" id="card" className="dark:border-slate-600" />
                   <Label
                     htmlFor="card"
-                    className="flex items-center gap-2 cursor-pointer"
+                    className="flex items-center gap-2 cursor-pointer text-foreground"
                   >
                     <CreditCard size={16} />
                     Карта
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="SBP" id="sbp" />
+                  <RadioGroupItem value="SBP" id="sbp" className="dark:border-slate-600" />
                   <Label
                     htmlFor="sbp"
-                    className="flex items-center gap-2 cursor-pointer"
+                    className="flex items-center gap-2 cursor-pointer text-foreground"
                   >
                     <Smartphone size={16} />
                     СБП
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="REQUISITES" id="requisites" />
+                  <RadioGroupItem value="REQUISITES" id="requisites" className="dark:border-slate-600" />
                   <Label
                     htmlFor="requisites"
-                    className="flex items-center gap-2 cursor-pointer"
+                    className="flex items-center gap-2 cursor-pointer text-foreground"
                   >
                     <Building2 size={16} />
                     Реквизиты
@@ -1183,31 +1183,35 @@ export default function PerformerProfilePage() {
             {requisiteType === "CARD" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="card-name">Название</Label>
+                  <Label htmlFor="card-name" className="text-foreground">Название</Label>
                   <Input
                     id="card-name"
                     placeholder="Основная карта"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="card-number">Номер карты</Label>
+                  <Label htmlFor="card-number" className="text-foreground">Номер карты</Label>
                   <Input
                     id="card-number"
                     placeholder="0000 0000 0000 0000"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="card-holder">Владелец карты</Label>
+                  <Label htmlFor="card-holder" className="text-foreground">Владелец карты</Label>
                   <Input
                     id="card-holder"
                     placeholder="IVAN IVANOV"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="card-bank">Название банка</Label>
+                  <Label htmlFor="card-bank" className="text-foreground">Название банка</Label>
                   <Input
                     id="card-bank"
                     placeholder="Сбербанк"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
               </>
@@ -1216,17 +1220,19 @@ export default function PerformerProfilePage() {
             {requisiteType === "SBP" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="sbp-name">Название</Label>
+                  <Label htmlFor="sbp-name" className="text-foreground">Название</Label>
                   <Input
                     id="sbp-name"
                     placeholder="СБП"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="sbp-phone">Номер телефона</Label>
+                  <Label htmlFor="sbp-phone" className="text-foreground">Номер телефона</Label>
                   <Input
                     id="sbp-phone"
                     placeholder="+7 (999) 000-00-00"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
               </>
@@ -1235,56 +1241,63 @@ export default function PerformerProfilePage() {
             {requisiteType === "REQUISITES" && (
               <>
                 <div className="space-y-2">
-                  <Label htmlFor="req-name">Название</Label>
+                  <Label htmlFor="req-name" className="text-foreground">Название</Label>
                   <Input
                     id="req-name"
                     placeholder="Расчетный счет"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="req-inn">ИНН</Label>
+                    <Label htmlFor="req-inn" className="text-foreground">ИНН</Label>
                     <Input
                       id="req-inn"
                       placeholder="7701234567"
+                      className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="req-ogrnip">ОГРНИП</Label>
+                    <Label htmlFor="req-ogrnip" className="text-foreground">ОГРНИП</Label>
                     <Input
                       id="req-ogrnip"
                       placeholder="304770000000000"
+                      className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="req-account">Расчетный счет</Label>
+                    <Label htmlFor="req-account" className="text-foreground">Расчетный счет</Label>
                     <Input
                       id="req-account"
                       placeholder="40802810000000000000"
+                      className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="req-bik">БИК</Label>
+                    <Label htmlFor="req-bik" className="text-foreground">БИК</Label>
                     <Input
                       id="req-bik"
                       placeholder="044525225"
+                      className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="req-bank-full">Название банка</Label>
+                  <Label htmlFor="req-bank-full" className="text-foreground">Название банка</Label>
                   <Input
                     id="req-bank-full"
                     placeholder="ПАО Сбербанк"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="req-correspondent">Корр. счет</Label>
+                  <Label htmlFor="req-correspondent" className="text-foreground">Корр. счет</Label>
                   <Input
                     id="req-correspondent"
                     placeholder="30101810400000000225"
+                    className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
                   />
                 </div>
               </>
@@ -1298,20 +1311,23 @@ export default function PerformerProfilePage() {
                 setIsRequisiteDialogOpen(false);
                 setRequisiteType("REQUISITES");
               }}
+              className="dark:border-slate-700 dark:text-foreground"
             >
               Отмена
             </Button>
-            <Button onClick={handleAddRequisite}>Добавить</Button>
+            <Button onClick={handleAddRequisite} className="bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600">
+              Добавить
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
       {/* Upload Document Dialog */}
       <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle>Загрузить документ</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-foreground">Загрузить документ</DialogTitle>
+            <DialogDescription className="text-slate-500 dark:text-slate-400">
               Загрузите документ исполнителя
             </DialogDescription>
           </DialogHeader>
@@ -1320,7 +1336,7 @@ export default function PerformerProfilePage() {
               <Label>Файл</Label>
               <div
                 className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
-                  uploadDocumentFile ? "border-brand-500 bg-brand-50" : "border-slate-300 hover:border-slate-400"
+                  uploadDocumentFile ? "border-brand-500 bg-brand-50 dark:border-brand-700 dark:bg-brand-950" : "border-slate-300 hover:border-slate-400 dark:border-slate-600 dark:hover:border-slate-500"
                 }`}
               >
                 <input
@@ -1336,40 +1352,41 @@ export default function PerformerProfilePage() {
                 <label htmlFor="performer-document-upload" className="cursor-pointer">
                   {uploadDocumentFile ? (
                     <div className="flex flex-col items-center gap-2">
-                      <CheckCircle2 className="h-8 w-8 text-brand-600" />
-                      <p className="text-sm font-medium text-brand-700">{uploadDocumentFile.name}</p>
-                      <p className="text-xs text-slate-500">{(uploadDocumentFile.size / 1024).toFixed(1)} KB</p>
+                      <CheckCircle2 className="h-8 w-8 text-brand-600 dark:text-brand-400" />
+                      <p className="text-sm font-medium text-brand-700 dark:text-brand-300">{uploadDocumentFile.name}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{(uploadDocumentFile.size / 1024).toFixed(1)} KB</p>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2">
-                      <Upload className="h-8 w-8 text-slate-400" />
-                      <p className="text-sm font-medium text-slate-700">Нажмите для загрузки</p>
-                      <p className="text-xs text-slate-500">JPG, PNG, PDF, DOC, DOCX</p>
+                      <Upload className="h-8 w-8 text-slate-400 dark:text-slate-500" />
+                      <p className="text-sm font-medium text-slate-700 dark:text-slate-300">Нажмите для загрузки</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">JPG, PNG, PDF, DOC, DOCX</p>
                     </div>
                   )}
                 </label>
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="document-description">Описание</Label>
+              <Label htmlFor="document-description" className="text-foreground">Описание</Label>
               <Textarea
                 id="document-description"
                 value={uploadDocumentDescription}
                 onChange={(e) => setUploadDocumentDescription(e.target.value)}
                 placeholder="Описание документа..."
                 rows={3}
+                className="dark:bg-slate-800 dark:border-slate-700 dark:text-foreground"
               />
             </div>
           </div>
           <DialogFooter className="flex-col sm:flex-row gap-2">
-            <Button variant="outline" size="sm" onClick={() => setIsUploadDialogOpen(false)}>
+            <Button variant="outline" size="sm" onClick={() => setIsUploadDialogOpen(false)} className="dark:border-slate-700 dark:text-foreground">
               Отмена
             </Button>
             <Button
               size="sm"
               onClick={handleUploadDocument}
               disabled={!uploadDocumentFile}
-              className="bg-brand-600 text-white hover:bg-brand-700"
+              className="bg-brand-600 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600"
             >
               <Upload className="h-4 w-4 mr-2" />
               Загрузить
@@ -1380,13 +1397,13 @@ export default function PerformerProfilePage() {
 
       {/* Delete Dialog */}
       <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-        <DialogContent>
+        <DialogContent className="bg-white dark:bg-card">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Trash2 className="h-5 w-5 text-red-600" />
+            <DialogTitle className="flex items-center gap-2 text-foreground">
+              <Trash2 className="h-5 w-5 text-red-600 dark:text-red-400" />
               Удалить исполнителя?
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-slate-500 dark:text-slate-400">
               Вы уверены что хотите удалить {performer.last_name}{" "}
               {performer.first_name}? Это действие нельзя отменить.
             </DialogDescription>
@@ -1397,6 +1414,7 @@ export default function PerformerProfilePage() {
               size="sm"
               onClick={() => setIsDeleteOpen(false)}
               disabled={isDeleting}
+              className="dark:border-slate-700 dark:text-foreground"
             >
               Отмена
             </Button>
@@ -1404,7 +1422,7 @@ export default function PerformerProfilePage() {
               size="sm"
               onClick={handleDelete}
               disabled={isDeleting}
-              className="bg-red-600 text-white hover:bg-red-700"
+              className="bg-red-600 text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600"
             >
               {isDeleting ? "Удаление..." : "Удалить"}
             </Button>

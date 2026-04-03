@@ -188,7 +188,7 @@ export function CitySelector({
           className="w-full justify-between h-9 font-normal"
           disabled={disabled}
         >
-          <span className={cn(!value && "text-slate-500")}>
+          <span className={cn(!value && "text-slate-500 dark:text-zinc-400")}>
             {value || placeholder}
           </span>
           <div className="flex items-center gap-1">
@@ -196,7 +196,7 @@ export function CitySelector({
               <button
                 type="button"
                 onClick={handleClear}
-                className="hover:bg-slate-100 rounded p-0.5"
+                className="hover:bg-slate-100 dark:hover:bg-zinc-800 rounded p-0.5"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
@@ -205,7 +205,7 @@ export function CitySelector({
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+      <PopoverContent className="w-[--radix-popover-trigger-width] p-0 bg-white dark:bg-zinc-900 dark:border-zinc-700" align="start">
         <Command shouldFilter={false}>
           <CommandInput
             placeholder="Поиск города..."

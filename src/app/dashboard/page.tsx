@@ -1,16 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Users,
   FileText,
   DollarSign,
-  TrendingUp,
-  TrendingDown,
   Phone,
   UserCheck,
   Plus,
-  Trash2,
   GripVertical,
   Calendar,
   CheckCircle2,
@@ -24,8 +21,6 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -43,93 +38,6 @@ import {
   useDraggable,
   useDroppable,
 } from "@dnd-kit/core";
-
-// Mock данные
-const statsData = {
-  clients: 156,
-  clientsChange: 12,
-  performers: 48,
-  performersChange: 5,
-  applications: 89,
-  applicationsChange: -3,
-  revenue: 1250000,
-  revenueChange: 8,
-};
-
-const revenueData = {
-  week: [
-    { name: "Пн", income: 120000, expense: 45000 },
-    { name: "Вт", income: 180000, expense: 62000 },
-    { name: "Ср", income: 150000, expense: 51000 },
-    { name: "Чт", income: 220000, expense: 78000 },
-    { name: "Пт", income: 195000, expense: 67000 },
-    { name: "Сб", income: 95000, expense: 32000 },
-    { name: "Вс", income: 75000, expense: 25000 },
-  ],
-  month: [
-    { name: "Неделя 1", income: 850000, expense: 320000 },
-    { name: "Неделя 2", income: 920000, expense: 380000 },
-    { name: "Неделя 3", income: 780000, expense: 290000 },
-    { name: "Неделя 4", income: 1100000, expense: 450000 },
-  ],
-  year: [
-    { name: "Янв", income: 3200000, expense: 1200000 },
-    { name: "Фев", income: 2800000, expense: 1100000 },
-    { name: "Мар", income: 3500000, expense: 1400000 },
-    { name: "Апр", income: 3100000, expense: 1250000 },
-    { name: "Май", income: 2900000, expense: 1150000 },
-    { name: "Июн", income: 3400000, expense: 1350000 },
-  ],
-};
-
-const clientTypeData = [
-  { name: "Физ. лица", value: 65, color: "#8b5cf6" },
-  { name: "Юр. лица", value: 35, color: "#3b82f6" },
-];
-
-const mockTasks = {
-  TODO: [
-    { id: "1", title: "Подготовить документы для ООО Вектор", date: "25.03" },
-    { id: "2", title: "Согласовать время переезда", date: "25.03" },
-    { id: "3", title: "Найти исполнителей на выходные", date: "26.03" },
-  ],
-  IN_PROGRESS: [
-    { id: "4", title: "Переезд офиса на Ленина 45", date: "24.03" },
-    { id: "5", title: "Такелажные работы", date: "24.03" },
-  ],
-  DONE: [
-    { id: "6", title: "Разгрузка контейнера", date: "23.03" },
-    { id: "7", title: "Упаковка вещей", date: "22.03" },
-    { id: "8", title: "Демонтаж мебели", date: "21.03" },
-  ],
-  CANCELLED: [
-    { id: "9", title: "Вывоз мусора (отменён)", date: "20.03" },
-  ],
-};
-
-const mockRecentApplications = [
-  { id: "#047", title: "Переезд офиса", client: "ООО «Вектор»", amount: "45 000 ₽", status: "NEW" },
-  { id: "#046", title: "Такелажные работы", client: "Иванов П.С.", amount: "78 000 ₽", status: "IN_PROGRESS" },
-  { id: "#045", title: "Разгрузка контейнера", client: "ООО «Ромашка»", amount: "32 000 ₽", status: "COMPLETED" },
-  { id: "#044", title: "Демонтаж мебели", client: "Сидоров В.К.", amount: "15 000 ₽", status: "COMPLETED" },
-  { id: "#043", title: "Упаковка вещей", client: "Кузнецова Е.П.", amount: "12 000 ₽", status: "NEW" },
-];
-
-const mockRecentCalls = [
-  { id: 1, phone: "+7 (999) 123-45-67", client: "Иванов П.С.", duration: 125, status: "ANSWERED" },
-  { id: 2, phone: "+7 (495) 123-45-67", client: null, duration: 0, status: "MISSED" },
-  { id: 3, phone: "+7 (999) 987-65-43", client: "Сидоров В.К.", duration: 340, status: "ANSWERED" },
-  { id: 4, phone: "+7 (999) 555-44-33", client: "ООО «Вектор»", duration: 45, status: "ANSWERED" },
-  { id: 5, phone: "+7 (999) 111-22-33", client: null, duration: 0, status: "MISSED" },
-];
-
-const mockTopPerformers = [
-  { id: 1, name: "Смирнов А.В.", orders: 24, earnings: "96 000 ₽", avatar: "СА" },
-  { id: 2, name: "Козлова М.И.", orders: 18, earnings: "63 000 ₽", avatar: "КМ" },
-  { id: 3, name: "Волков Д.С.", orders: 15, earnings: "52 500 ₽", avatar: "ВД" },
-  { id: 4, name: "Петрова Е.А.", orders: 12, earnings: "42 000 ₽", avatar: "ПЕ" },
-  { id: 5, name: "Новикова О.С.", orders: 10, earnings: "35 000 ₽", avatar: "НО" },
-];
 
 const statusColors: Record<string, string> = {
   NEW: "bg-blue-100 text-blue-700 border-blue-200",
@@ -152,16 +60,17 @@ const columnConfig: Record<string, { title: string; icon: any; color: string; ac
   CANCELLED: { title: "Отменено", icon: XCircle, color: "bg-red-100 dark:bg-red-900/20", accent: "bg-red-500/10 dark:bg-red-500/20" },
 };
 
-const formatMoney = (amount: number) => {
+const formatMoney = (amount: number | string) => {
+  const num = typeof amount === 'string' ? parseFloat(amount) : amount;
   return new Intl.NumberFormat("ru-RU", {
     style: "currency",
     currency: "RUB",
     minimumFractionDigits: 0,
-  }).format(amount);
+  }).format(num);
 };
 
 const formatDuration = (seconds: number) => {
-  if (seconds === 0) return "—";
+  if (!seconds || seconds === 0) return "—";
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
   return `${mins}:${secs.toString().padStart(2, "0")}`;
@@ -199,7 +108,9 @@ const DraggableTask = ({ task, columnId }: { task: any; columnId: string }) => {
             <p className="font-medium text-sm line-clamp-2 text-slate-900 dark:text-foreground">{task.title}</p>
             <div className="flex items-center gap-1 mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-700">
               <Calendar className="h-3 w-3 text-slate-400" />
-              <span className="text-xs text-slate-500 dark:text-slate-400">{task.date}</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">
+                {new Date(task.created_at).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })}
+              </span>
             </div>
           </div>
         </div>
@@ -257,11 +168,96 @@ const DroppableColumn = ({
   );
 };
 
+// Mock data — без backend
+const MOCK_STATS = { clients: 156, performers: 48, applications: 234, revenue: 4850000 };
+
+const MOCK_REVENUE: Record<string, { name: string; income: number; expense: number }[]> = {
+  week: [
+    { name: "Пн", income: 45000, expense: 12000 },
+    { name: "Вт", income: 62000, expense: 18000 },
+    { name: "Ср", income: 38000, expense: 9000 },
+    { name: "Чт", income: 71000, expense: 22000 },
+    { name: "Пт", income: 55000, expense: 15000 },
+  ],
+  month: [
+    { name: "Нед 1", income: 185000, expense: 62000 },
+    { name: "Нед 2", income: 210000, expense: 78000 },
+    { name: "Нед 3", income: 195000, expense: 55000 },
+    { name: "Нед 4", income: 240000, expense: 91000 },
+  ],
+  year: [
+    { name: "Янв", income: 520000, expense: 180000 },
+    { name: "Фев", income: 610000, expense: 210000 },
+    { name: "Мар", income: 740000, expense: 250000 },
+    { name: "Апр", income: 680000, expense: 195000 },
+    { name: "Май", income: 820000, expense: 280000 },
+    { name: "Июн", income: 750000, expense: 230000 },
+    { name: "Июл", income: 690000, expense: 210000 },
+    { name: "Авг", income: 880000, expense: 310000 },
+    { name: "Сен", income: 920000, expense: 290000 },
+    { name: "Окт", income: 870000, expense: 260000 },
+    { name: "Ноя", income: 950000, expense: 320000 },
+    { name: "Дек", income: 1100000, expense: 380000 },
+  ],
+};
+
+const MOCK_TASKS = {
+  TODO: [
+    { id: 101, title: "Подготовить коммерческое предложение для ООО «Альфа»", created_at: "2026-04-01T09:00:00Z" },
+    { id: 102, title: "Обзвонить базу клиентов по новой услуге", created_at: "2026-04-02T10:00:00Z" },
+  ],
+  IN_PROGRESS: [
+    { id: 103, title: "Согласовать договор с ИП Петров", created_at: "2026-03-31T14:00:00Z" },
+    { id: 104, title: "Подготовить отчёт за март", created_at: "2026-03-30T11:00:00Z" },
+  ],
+  DONE: [
+    { id: 105, title: "Провести встречу с командой", created_at: "2026-03-28T09:00:00Z" },
+    { id: 106, title: "Отправить счёт ООО «Бета»", created_at: "2026-03-27T16:00:00Z" },
+  ],
+  CANCELLED: [
+    { id: 107, title: "Отменённая задача — тест", created_at: "2026-03-25T08:00:00Z" },
+  ],
+};
+
+const MOCK_APPLICATIONS = [
+  { id: 1001, title: "Разработка CRM для ООО «Гамма»", client: { company_name: "ООО «Гамма»", fio: null }, amount: 350000, status: "NEW" },
+  { id: 1002, title: "Интеграция телефонии", client: { company_name: null, fio: "Иванов И.И." }, amount: 120000, status: "IN_PROGRESS" },
+  { id: 1003, title: "Настройка аналитики", client: { company_name: "ООО «Дельта»", fio: null }, amount: 85000, status: "COMPLETED" },
+  { id: 1004, title: "Миграция данных", client: { company_name: "ИП Сидоров", fio: null }, amount: 200000, status: "IN_PROGRESS" },
+  { id: 1005, title: "Аудит безопасности", client: { company_name: "ООО «Эпсилон»", fio: null }, amount: 150000, status: "NEW" },
+];
+
+const MOCK_PERFORMERS = [
+  { id: 201, name: "Алексей Смирнов", avatar: "АС", orders: 24, earnings: 480000 },
+  { id: 202, name: "Мария Козлова", avatar: "МК", orders: 19, earnings: 395000 },
+  { id: 203, name: "Дмитрий Волков", avatar: "ДВ", orders: 17, earnings: 340000 },
+  { id: 204, name: "Елена Новикова", avatar: "ЕН", orders: 15, earnings: 310000 },
+  { id: 205, name: "Сергей Морозов", avatar: "СМ", orders: 12, earnings: 265000 },
+];
+
+const MOCK_CALLS = [
+  { id: 301, phone: "+7 (999) 111-22-33", status: "ANSWERED", duration: 245, direction: "INCOMING", created_at: "2026-04-03T14:30:00Z", client: { fio: "Петров П.П.", company_name: null } },
+  { id: 302, phone: "+7 (999) 444-55-66", status: "MISSED", duration: 0, direction: "INCOMING", created_at: "2026-04-03T13:15:00Z", client: { fio: null, company_name: "ООО «Зета»" } },
+  { id: 303, phone: "+7 (999) 777-88-99", status: "ANSWERED", duration: 120, direction: "OUTGOING", created_at: "2026-04-03T11:00:00Z", client: { fio: "Козлова А.В.", company_name: null } },
+  { id: 304, phone: "+7 (999) 222-33-44", status: "ANSWERED", duration: 380, direction: "INCOMING", created_at: "2026-04-03T09:45:00Z", client: { fio: null, company_name: "ИП Иванов" } },
+  { id: 305, phone: "+7 (999) 555-66-77", status: "MISSED", duration: 0, direction: "OUTGOING", created_at: "2026-04-02T17:30:00Z", client: { fio: "Смирнов В.В.", company_name: null } },
+];
+
 export default function DashboardPage() {
-  const [stats] = useState(statsData);
+  const [stats] = useState(MOCK_STATS);
   const [chartPeriod, setChartPeriod] = useState<"week" | "month" | "year">("month");
-  const [tasks, setTasks] = useState(mockTasks);
+  const [revenueData, setRevenueData] = useState(MOCK_REVENUE.month);
+  const [tasks, setTasks] = useState(MOCK_TASKS);
   const [activeTask, setActiveTask] = useState<any>(null);
+  const [recentApplications] = useState(MOCK_APPLICATIONS);
+  const [topPerformers] = useState(MOCK_PERFORMERS);
+  const [recentCalls] = useState(MOCK_CALLS);
+  const [loading] = useState(false);
+
+  // Обновляем график при смене периода
+  useEffect(() => {
+    setRevenueData(MOCK_REVENUE[chartPeriod]);
+  }, [chartPeriod]);
 
   const handleDragStart = (event: any) => {
     const { active } = event;
@@ -302,6 +298,17 @@ export default function DashboardPage() {
     setActiveTask(null);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600 mx-auto"></div>
+          <p className="mt-4 text-slate-600">Загрузка...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Stats Cards */}
@@ -312,17 +319,9 @@ export default function DashboardPage() {
             <Users className="h-4 w-4 text-slate-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{statsData.clients}</div>
+            <div className="text-2xl font-bold">{stats.clients}</div>
             <div className="flex items-center gap-1 text-xs">
-              {statsData.clientsChange > 0 ? (
-                <TrendingUp className="h-3 w-3 text-green-600" />
-              ) : (
-                <TrendingDown className="h-3 w-3 text-red-600" />
-              )}
-              <span className={statsData.clientsChange > 0 ? "text-green-600" : "text-red-600"}>
-                {statsData.clientsChange > 0 ? "+" : ""}{statsData.clientsChange}%
-              </span>
-              <span className="text-slate-500 dark:text-slate-400">за месяц</span>
+              <span className="text-slate-500 dark:text-slate-400">всего</span>
             </div>
           </CardContent>
         </Card>
@@ -333,17 +332,9 @@ export default function DashboardPage() {
             <UserCheck className="h-4 w-4 text-slate-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{statsData.performers}</div>
+            <div className="text-2xl font-bold">{stats.performers}</div>
             <div className="flex items-center gap-1 text-xs">
-              {statsData.performersChange > 0 ? (
-                <TrendingUp className="h-3 w-3 text-green-600" />
-              ) : (
-                <TrendingDown className="h-3 w-3 text-red-600" />
-              )}
-              <span className={statsData.performersChange > 0 ? "text-green-600" : "text-red-600"}>
-                {statsData.performersChange > 0 ? "+" : ""}{statsData.performersChange}%
-              </span>
-              <span className="text-slate-500 dark:text-slate-400">за месяц</span>
+              <span className="text-slate-500 dark:text-slate-400">всего</span>
             </div>
           </CardContent>
         </Card>
@@ -354,17 +345,9 @@ export default function DashboardPage() {
             <FileText className="h-4 w-4 text-slate-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{statsData.applications}</div>
+            <div className="text-2xl font-bold">{stats.applications}</div>
             <div className="flex items-center gap-1 text-xs">
-              {statsData.applicationsChange > 0 ? (
-                <TrendingUp className="h-3 w-3 text-green-600" />
-              ) : (
-                <TrendingDown className="h-3 w-3 text-red-600" />
-              )}
-              <span className={statsData.applicationsChange > 0 ? "text-green-600" : "text-red-600"}>
-                {statsData.applicationsChange > 0 ? "+" : ""}{statsData.applicationsChange}%
-              </span>
-              <span className="text-slate-500 dark:text-slate-400">за месяц</span>
+              <span className="text-slate-500 dark:text-slate-400">всего</span>
             </div>
           </CardContent>
         </Card>
@@ -375,17 +358,9 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-slate-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatMoney(statsData.revenue)}</div>
+            <div className="text-2xl font-bold">{formatMoney(stats.revenue)}</div>
             <div className="flex items-center gap-1 text-xs">
-              {statsData.revenueChange > 0 ? (
-                <TrendingUp className="h-3 w-3 text-green-600" />
-              ) : (
-                <TrendingDown className="h-3 w-3 text-red-600" />
-              )}
-              <span className={statsData.revenueChange > 0 ? "text-green-600" : "text-red-600"}>
-                {statsData.revenueChange > 0 ? "+" : ""}{statsData.revenueChange}%
-              </span>
-              <span className="text-slate-500 dark:text-slate-400">за месяц</span>
+              <span className="text-slate-500 dark:text-slate-400">всего</span>
             </div>
           </CardContent>
         </Card>
@@ -413,7 +388,7 @@ export default function DashboardPage() {
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%" key={chartPeriod}>
-                <AreaChart data={revenueData[chartPeriod]}>
+                <AreaChart data={revenueData}>
                   <defs>
                     <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
@@ -477,7 +452,10 @@ export default function DashboardPage() {
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
-                    data={clientTypeData}
+                    data={[
+                      { name: "Физ. лица", value: 65, color: "#8b5cf6" },
+                      { name: "Юр. лица", value: 35, color: "#3b82f6" },
+                    ]}
                     cx="50%"
                     cy="50%"
                     innerRadius={60}
@@ -487,7 +465,7 @@ export default function DashboardPage() {
                     label={({ name, value }) => `${name}: ${value}%`}
                     labelLine={false}
                   >
-                    {clientTypeData.map((entry, index) => (
+                    {[{ name: "Физ. лица", value: 65, color: "#8b5cf6" }, { name: "Юр. лица", value: 35, color: "#3b82f6" }].map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
@@ -502,7 +480,7 @@ export default function DashboardPage() {
               </ResponsiveContainer>
             </div>
             <div className="flex justify-center gap-4 mt-4">
-              {clientTypeData.map((item) => (
+              {[{ name: "Физ. лица", color: "#8b5cf6" }, { name: "Юр. лица", color: "#3b82f6" }].map((item) => (
                 <div key={item.name} className="flex items-center gap-2">
                   <div
                     className="w-3 h-3 rounded-full"
@@ -543,7 +521,7 @@ export default function DashboardPage() {
                   columnId={key}
                   title={config.title}
                   icon={config.icon}
-                  tasks={tasks[key as keyof typeof tasks]}
+                  tasks={tasks[key as keyof typeof tasks] || []}
                 />
               ))}
             </div>
@@ -577,7 +555,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {mockRecentApplications.map((app) => (
+              {recentApplications.map((app) => (
                 <div
                   key={app.id}
                   className="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -588,11 +566,15 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <p className="font-medium text-sm text-slate-900 dark:text-foreground">{app.title}</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{app.client}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                        {app.client?.company_name || app.client?.fio || 'Клиент'}
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium text-slate-900 dark:text-foreground">{app.amount}</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-foreground">
+                      {app.amount ? formatMoney(app.amount) : '—'}
+                    </p>
                     <Badge variant="outline" className={statusColors[app.status]}>
                       {statusLabels[app.status]}
                     </Badge>
@@ -618,7 +600,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {mockTopPerformers.map((performer, index) => (
+              {topPerformers.map((performer, index) => (
                 <div
                   key={performer.id}
                   className="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -627,7 +609,7 @@ export default function DashboardPage() {
                     <div className="relative">
                       <Avatar className="h-10 w-10">
                         <AvatarFallback className="bg-brand-100 text-brand-700 text-sm font-medium dark:bg-brand-900 dark:text-brand-300">
-                          {performer.avatar}
+                          {performer.avatar || performer.name.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
                       {index < 3 && (
@@ -642,7 +624,7 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium text-green-600 dark:text-green-400">{performer.earnings}</p>
+                    <p className="text-sm font-medium text-green-600 dark:text-green-400">{formatMoney(performer.earnings)}</p>
                   </div>
                 </div>
               ))}
@@ -666,7 +648,7 @@ export default function DashboardPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {mockRecentCalls.map((call) => (
+            {recentCalls.map((call) => (
               <div
                 key={call.id}
                 className="flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -682,7 +664,7 @@ export default function DashboardPage() {
                   <div>
                     <p className="font-medium text-sm text-slate-900 dark:text-foreground">{call.phone}</p>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {call.client || "Не определён"}
+                      {call.caller_name || call.client?.company_name || call.client?.fio || "Не определён"}
                     </p>
                   </div>
                 </div>

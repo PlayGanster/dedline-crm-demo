@@ -44,10 +44,10 @@ const mockOrders = [
 ];
 
 const statusColors: Record<string, string> = {
-  new: "bg-blue-100 text-blue-700",
-  progress: "bg-yellow-100 text-yellow-700",
-  done: "bg-green-100 text-green-700",
-  cancelled: "bg-red-100 text-red-700",
+  new: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+  progress: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300",
+  done: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+  cancelled: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
 };
 
 const statusLabels: Record<string, string> = {
@@ -90,18 +90,18 @@ export default function ClientProfilePage() {
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold">Клиент</h1>
-            <p className="text-sm text-slate-500">{fullName}</p>
+            <h1 className="text-xl font-bold text-foreground">Клиент</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{fullName}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon-sm">
+          <Button variant="outline" size="icon-sm" className="dark:border-slate-700 dark:text-foreground">
             <Pencil className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
             size="icon-sm"
-            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950"
             onClick={() => setIsDeleteOpen(true)}
           >
             <Trash2 className="h-4 w-4" />
@@ -110,11 +110,11 @@ export default function ClientProfilePage() {
       </div>
 
       {/* Main Card */}
-      <div className="rounded-xl border bg-white overflow-hidden">
+      <div className="rounded-xl border bg-white dark:bg-card overflow-hidden">
         {/* Profile Section */}
         <div className="p-6 border-b">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-brand-100 text-brand-600 shrink-0">
+            <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-brand-100 text-brand-600 dark:bg-brand-900 dark:text-brand-400 shrink-0">
               {client.type === "INDIVIDUAL" ? (
                 <User className="h-8 w-8" />
               ) : (
@@ -126,8 +126,8 @@ export default function ClientProfilePage() {
                 <Badge
                   className={
                     client.type === "INDIVIDUAL"
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-purple-100 text-purple-700"
+                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                      : "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300"
                   }
                 >
                   {client.type === "INDIVIDUAL" ? "Физ. лицо" : "Юр. лицо"}
@@ -135,8 +135,8 @@ export default function ClientProfilePage() {
                 <Badge
                   className={
                     client.is_active
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
+                      ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+                      : "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
                   }
                 >
                   <span
@@ -147,7 +147,7 @@ export default function ClientProfilePage() {
                   {client.is_active ? "Активен" : "Не активен"}
                 </Badge>
               </div>
-              <p className="text-sm text-slate-500">Клиент #{client.id}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Клиент #{client.id}</p>
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default function ClientProfilePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* Contact Info */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                 <User className="h-4 w-4" />
                 Контакты
               </h3>
@@ -165,13 +165,13 @@ export default function ClientProfilePage() {
                 {client.email && (
                   <div className="flex items-center gap-2 text-sm">
                     <Mail className="h-4 w-4 text-slate-400" />
-                    <span>{client.email}</span>
+                    <span className="text-foreground">{client.email}</span>
                   </div>
                 )}
                 {client.phone && (
                   <div className="flex items-center gap-2 text-sm">
                     <Phone className="h-4 w-4 text-slate-400" />
-                    <span>{client.phone}</span>
+                    <span className="text-foreground">{client.phone}</span>
                   </div>
                 )}
               </div>
@@ -179,27 +179,27 @@ export default function ClientProfilePage() {
 
             {/* Documents */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                 <FileText className="h-4 w-4" />
                 Документы
               </h3>
               <div className="space-y-2">
                 {client.inn && (
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-slate-500 w-12">ИНН</span>
-                    <span className="font-medium">{client.inn}</span>
+                    <span className="text-slate-500 dark:text-slate-400 w-12">ИНН</span>
+                    <span className="font-medium text-foreground">{client.inn}</span>
                   </div>
                 )}
                 {client.kpp && (
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-slate-500 w-12">КПП</span>
-                    <span className="font-medium">{client.kpp}</span>
+                    <span className="text-slate-500 dark:text-slate-400 w-12">КПП</span>
+                    <span className="font-medium text-foreground">{client.kpp}</span>
                   </div>
                 )}
                 {client.ogrn && (
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-slate-500 w-12">ОГРН</span>
-                    <span className="font-medium">{client.ogrn}</span>
+                    <span className="text-slate-500 dark:text-slate-400 w-12">ОГРН</span>
+                    <span className="font-medium text-foreground">{client.ogrn}</span>
                   </div>
                 )}
               </div>
@@ -207,12 +207,12 @@ export default function ClientProfilePage() {
 
             {/* Address */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
                 Адрес
               </h3>
               {client.legal_address ? (
-                <p className="text-sm">{client.legal_address}</p>
+                <p className="text-sm text-foreground">{client.legal_address}</p>
               ) : (
                 <p className="text-sm text-slate-400">Не указан</p>
               )}
@@ -222,50 +222,50 @@ export default function ClientProfilePage() {
       </div>
 
       {/* Meta Info */}
-      <div className="rounded-xl border bg-white p-4">
-        <h3 className="text-sm font-semibold text-slate-700 mb-4 flex items-center gap-2">
+      <div className="rounded-xl border bg-white dark:bg-card p-4">
+        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-4 flex items-center gap-2">
           <Calendar className="h-4 w-4" />
           Информация
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-              <span className="text-sm font-bold text-slate-600">#</span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+              <span className="text-sm font-bold text-slate-600 dark:text-slate-400">#</span>
             </div>
             <div>
-              <p className="text-xs text-slate-500">ID</p>
-              <p className="text-sm font-medium">{client.id}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">ID</p>
+              <p className="text-sm font-medium text-foreground">{client.id}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-              <Calendar className="h-5 w-5 text-slate-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+              <Calendar className="h-5 w-5 text-slate-600 dark:text-slate-400" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Создан</p>
-              <p className="text-sm font-medium">
+              <p className="text-xs text-slate-500 dark:text-slate-400">Создан</p>
+              <p className="text-sm font-medium text-foreground">
                 {new Date(client.created_at).toLocaleDateString("ru-RU")}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-              <Clock className="h-5 w-5 text-slate-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+              <Clock className="h-5 w-5 text-slate-600 dark:text-slate-400" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Обновлен</p>
-              <p className="text-sm font-medium">
+              <p className="text-xs text-slate-500 dark:text-slate-400">Обновлен</p>
+              <p className="text-sm font-medium text-foreground">
                 {new Date(client.updated_at).toLocaleDateString("ru-RU")}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-              <Clock className="h-5 w-5 text-slate-600" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+              <Clock className="h-5 w-5 text-slate-600 dark:text-slate-400" />
             </div>
             <div>
-              <p className="text-xs text-slate-500">Время</p>
-              <p className="text-sm font-medium">
+              <p className="text-xs text-slate-500 dark:text-slate-400">Время</p>
+              <p className="text-sm font-medium text-foreground">
                 {new Date(client.created_at).toLocaleTimeString("ru-RU", {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -277,39 +277,39 @@ export default function ClientProfilePage() {
       </div>
 
       {/* Orders */}
-      <div className="rounded-xl border bg-white overflow-hidden">
+      <div className="rounded-xl border bg-white dark:bg-card overflow-hidden">
         <div className="flex items-center justify-between p-4 border-b">
-          <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
             <FileCheck className="h-4 w-4" />
             Последние заявки
           </h3>
-          <Button variant="ghost" size="sm" className="text-brand-600 hover:text-brand-700 hover:bg-brand-50">
+          <Button variant="ghost" size="sm" className="text-brand-600 hover:text-brand-700 hover:bg-brand-50 dark:text-brand-400 dark:hover:bg-brand-950">
             Все
             <ChevronRight className="h-4 w-4 ml-1" />
           </Button>
         </div>
         <div className="divide-y">
           {mockOrders.length === 0 ? (
-            <div className="p-6 text-center text-slate-500 text-sm">
+            <div className="p-6 text-center text-slate-500 dark:text-slate-400 text-sm">
               Нет заявок
             </div>
           ) : (
             mockOrders.map((order) => (
               <div
                 key={order.id}
-                className="flex items-center justify-between p-3 hover:bg-slate-50 transition-colors cursor-pointer"
+                className="flex items-center justify-between p-3 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors cursor-pointer"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-sm font-medium text-brand-600 shrink-0">{order.id}</span>
+                  <span className="text-sm font-medium text-brand-600 dark:text-brand-400 shrink-0">{order.id}</span>
                   <Badge className={statusColors[order.status]} variant="outline">
                     {statusLabels[order.status]}
                   </Badge>
-                  <span className="text-sm truncate">{order.title}</span>
+                  <span className="text-sm truncate text-foreground">{order.title}</span>
                 </div>
                 <div className="flex items-center gap-4 shrink-0">
-                  <span className="text-sm text-slate-500">{order.date}</span>
-                  <span className="text-sm font-medium">{order.amount}</span>
-                  <ChevronRight className="h-4 w-4 text-slate-400" />
+                  <span className="text-sm text-slate-500 dark:text-slate-400">{order.date}</span>
+                  <span className="text-sm font-medium text-foreground">{order.amount}</span>
+                  <ChevronRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                 </div>
               </div>
             ))

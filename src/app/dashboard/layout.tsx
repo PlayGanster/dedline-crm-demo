@@ -4,7 +4,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { useRouter, usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { cn } from "@/lib/utils";
-import { Plus, Search, Settings, LogOut, Bell, FileText, Users, DollarSign, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Search, Settings, LogOut, ChevronLeft, ChevronRight } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ThemeToggle } from "@/components/theme-provider";
 import {
@@ -27,8 +27,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
 import { AnimatePresence, motion } from "framer-motion";
+import { FileText, Users, DollarSign } from "lucide-react";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
@@ -40,14 +40,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     router.push("/login");
   };
-
-  const notifications = [
-    { id: 1, title: "Новый заказ #047", description: "Иванов Петр Сергеевич", time: "2 мин назад", type: "order" },
-    { id: 2, title: "Заказ #046 обновлён", description: "Мария К. изменила статус", time: "5 мин назад", type: "update" },
-    { id: 3, title: "Документы загружены", description: "Дмитрий В. загрузил акты", time: "12 мин назад", type: "document" },
-  ];
 
   const quickCreateItems = [
     { id: 1, title: "Новый заказ", description: "Создать заказ клиента", icon: FileText },
@@ -125,73 +121,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </TooltipContent>
               </Tooltip>
 
-              {/* Desktop notifications dropdown */}
-              <DropdownMenu>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="hidden lg:inline-block">
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="icon-sm" className="relative">
-                          <Bell className="h-4 w-4" />
-                          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">
-                            3
-                          </span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Уведомления</p>
-                  </TooltipContent>
-                </Tooltip>
-                <DropdownMenuContent align="start" className="min-w-80">
-                  <DropdownMenuLabel className="flex items-center justify-between text-slate-900 dark:text-foreground">
-                    Уведомления
-                    <Badge variant="secondary" className="text-xs">3 новых</Badge>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="dark:bg-slate-700" />
-                  <ScrollArea className="max-h-80">
-                    <div className="py-1">
-                      {notifications.map((notification) => (
-                        <DropdownMenuItem key={notification.id} className="flex flex-col items-start gap-1 p-3 cursor-pointer">
-                          <div className="flex items-center justify-between w-full">
-                            <span className="font-medium text-sm text-slate-900 dark:text-foreground">{notification.title}</span>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">{notification.time}</span>
-                          </div>
-                          <span className="text-xs text-slate-600 dark:text-slate-400">{notification.description}</span>
-                        </DropdownMenuItem>
-                      ))}
-                    </div>
-                  </ScrollArea>
-                  <DropdownMenuSeparator className="dark:bg-slate-700" />
-                  <DropdownMenuItem className="justify-center text-brand-600 dark:text-brand-400 cursor-pointer" onClick={() => router.push('/dashboard/notifications')}>
-                    Показать все уведомления
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
               {/* Theme Toggle - Desktop */}
               <ThemeToggle className="hidden lg:flex" />
-
-              {/* Mobile notifications button */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon-sm"
-                    className="lg:hidden relative"
-                    onClick={() => router.push('/dashboard/notifications')}
-                  >
-                    <Bell className="h-4 w-4" />
-                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] font-bold text-white flex items-center justify-center">
-                      3
-                    </span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Уведомления</p>
-                </TooltipContent>
-              </Tooltip>
             </div>
 
             <DropdownMenu>
@@ -205,7 +136,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem className="cursor-pointer gap-2">
+                  <DropdownMenuItem className="cursor-pointer gap-2" onClick={() => router.push('/dashboard/profile')}>
                     <Settings size={16} />
                     Настройки
                   </DropdownMenuItem>

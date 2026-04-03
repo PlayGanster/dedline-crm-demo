@@ -283,16 +283,16 @@ export default function PerformersPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <Phone className="h-4 w-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                    <Phone className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                     <span>{performer.phone}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <Mail className="h-4 w-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                    <Mail className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                     <span className="truncate">{performer.email}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <MapPin className="h-4 w-4 text-slate-400" />
+                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+                    <MapPin className="h-4 w-4 text-slate-400 dark:text-slate-500" />
                     <span className="truncate">{performer.location}</span>
                   </div>
                   <div className="flex items-center justify-between pt-2 border-t">
@@ -300,7 +300,7 @@ export default function PerformersPage() {
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       <span className="text-sm font-medium">{performer.rating}</span>
                     </div>
-                    <span className="text-xs text-slate-500">{performer.orders} заказов</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">{performer.orders} заказов</span>
                   </div>
                 </CardContent>
               </Card>

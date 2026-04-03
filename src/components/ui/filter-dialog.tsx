@@ -95,15 +95,15 @@ export function FilterDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent hideClose className="w-full h-full sm:w-[90vw] sm:h-auto sm:max-w-2xl sm:max-h-[80vh] flex flex-col p-0 gap-0 sm:rounded-lg">
+      <DialogContent hideClose className="w-full h-full sm:w-[90vw] sm:h-auto sm:max-w-2xl sm:max-h-[80vh] flex flex-col p-0 gap-0 sm:rounded-lg bg-white dark:bg-card">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-slate-50 sm:rounded-t-lg">
-          <DialogTitle className="text-base font-semibold">Фильтры</DialogTitle>
+        <div className="flex items-center justify-between p-4 border-b bg-zinc-50 dark:bg-zinc-800 sm:rounded-t-lg">
+          <DialogTitle className="text-base font-semibold text-zinc-900 dark:text-foreground">Фильтры</DialogTitle>
           <Button
             variant="ghost"
             size="icon-sm"
             onClick={() => onOpenChange(false)}
-            className="h-8 w-8"
+            className="h-8 w-8 dark:text-foreground"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -114,13 +114,13 @@ export function FilterDialog({
           <div className="space-y-3">
             {filters.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 mb-4">
-                  <PlusCircle className="h-6 w-6 text-slate-400" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 mb-4">
+                  <PlusCircle className="h-6 w-6 text-zinc-400" />
                 </div>
-                <p className="text-sm font-medium text-slate-700">
+                <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                   Нет активных фильтров
                 </p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                   Нажмите "Добавить фильтр", чтобы создать фильтр
                 </p>
               </div>
@@ -128,7 +128,7 @@ export function FilterDialog({
               filters.map((filter, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-2 p-3 rounded-lg border bg-white"
+                  className="flex items-start gap-2 p-3 rounded-lg border bg-white dark:bg-zinc-900"
                 >
                   <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <Select
@@ -137,7 +137,7 @@ export function FilterDialog({
                         updateFilter(index, "columnId", value)
                       }
                     >
-                      <SelectTrigger className="w-full h-9 text-xs">
+                      <SelectTrigger className="w-full h-9 text-xs dark:bg-zinc-800 dark:border-zinc-700 dark:text-foreground">
                         <SelectValue placeholder="Колонка" />
                       </SelectTrigger>
                       <SelectContent>
@@ -155,7 +155,7 @@ export function FilterDialog({
                         updateFilter(index, "operator", value)
                       }
                     >
-                      <SelectTrigger className="w-full h-9 text-xs">
+                      <SelectTrigger className="w-full h-9 text-xs dark:bg-zinc-800 dark:border-zinc-700 dark:text-foreground">
                         <SelectValue placeholder="Оператор" />
                       </SelectTrigger>
                       <SelectContent>
@@ -177,7 +177,7 @@ export function FilterDialog({
                     <Input
                       placeholder="Значение"
                       value={filter.value}
-                      className="h-9 w-full text-xs"
+                      className="h-9 w-full text-xs dark:bg-zinc-800 dark:border-zinc-700 dark:text-foreground"
                       onChange={(e) =>
                         updateFilter(index, "value", e.target.value)
                       }
@@ -188,7 +188,7 @@ export function FilterDialog({
                     variant="ghost"
                     size="icon-sm"
                     onClick={() => removeFilter(index)}
-                    className="flex-shrink-0 h-8 w-8"
+                    className="flex-shrink-0 h-8 w-8 dark:text-foreground"
                   >
                     <Trash2 className="h-4 w-4 text-red-500" />
                   </Button>
@@ -199,11 +199,11 @@ export function FilterDialog({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t bg-slate-50 rounded-b-lg">
+        <div className="p-4 border-t bg-zinc-50 dark:bg-zinc-800 rounded-b-lg">
           <div className="flex flex-col gap-3">
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full dark:border-zinc-700 dark:text-foreground"
               size="sm"
               onClick={addFilter}
             >
@@ -214,7 +214,7 @@ export function FilterDialog({
             {filters.length > 0 && (
               <Button
                 variant="ghost"
-                className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
                 size="sm"
                 onClick={handleClear}
               >
@@ -226,7 +226,7 @@ export function FilterDialog({
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full sm:w-1/2"
+                className="w-full sm:w-1/2 dark:border-zinc-700 dark:text-foreground"
                 onClick={() => onOpenChange(false)}
               >
                 Отмена
